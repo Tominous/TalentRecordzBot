@@ -4,6 +4,7 @@
   "prefix": "!*",
   "owner_id": "OWNERID",
   "youtube_api_key": "YoutubeAPI",
+  "twitch_api_key": "TwitchclientID",
   "admins": ["UserID", "UserID", "UserID", "UserID", "UserID"],
   "server_port":"Port"
 }
