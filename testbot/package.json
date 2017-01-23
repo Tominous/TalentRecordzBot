@@ -1,14 +1,14 @@
 {
-  "name": "musicbot",
+  "name": "TalentRecordz",
   "version": "1.0.0",
-  "description": "A simple node.js discord music bot",
-  "main": "index.js",
+  "description": "A simple node.js discord bot",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/developerCodex/musicbot.git"
+    "url": "git+ssh://git@github.com:ChisdealHD/TalentRecordzBot.git"
   },
   "keywords": [
     "music",
@@ -18,17 +18,21 @@
     "npm",
     "ytdl"
   ],
-  "author": "developerCodex, Joseph Banks, ZelAk312, Hackzilla, ASIANBOI",
-  "license": "I put de license in de folder",
+  "author": "ChisdealHD",
+  "license": "I put License in folder",
   "bugs": {
-    "url": "https://github.com/developerCodex/musicbot/issues"
+    "url": "https://github.com/ChisdealHD/TalentRecordzBot/issues"
   },
-  "homepage": "https://github.com/developerCodex/musicbot#readme",
+  "homepage": "https://github.com/ChisdealHD/TalentRecordzBot#readme",
   "dependencies": {
     "discord.js": "hydrabolt/discord.js#v8",
     "youtube-search": "^1.0.6",
     "mathjs": "^3.5.3",
     "ytdl-core": "^0.7.17",
-    "express":"^4"
+    "express":"^4",
+	"cheerio":"^0.22.0",
+	"request":"^2.79.0",
+	"node-opus":"^0.2.4",
+	"stringformat":"^0.0.5"
   }
 }
