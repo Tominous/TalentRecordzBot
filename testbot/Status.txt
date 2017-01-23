@@ -1,0 +1,4 @@
+NEW Discord.js v8.10 BOT with working &!play command.
+There will be more updates soon. just For now chill and enjoy music?
+Do &&help for Red bot Commands #backupbot
+Do &!help for DiscordJS Commands #CustomMadeBot

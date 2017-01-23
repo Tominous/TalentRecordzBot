@@ -1,0 +1,9 @@
+{
+  "token": "BotTOKEN",
+  "client_id": "BotID",
+  "prefix": "!*",
+  "owner_id": "OWNERID",
+  "youtube_api_key": "YoutubeAPI",
+  "admins": ["UserID", "UserID", "UserID", "UserID", "UserID"],
+  "server_port":"Port"
+}
