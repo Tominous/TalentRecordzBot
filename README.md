@@ -6,7 +6,7 @@ DiscordJS Discord Bot made by ChisdealHD and remake from JoeBanks13
 
 Offical bot: https://github.com/JoeBanks13/Music-Butt
 
-This bot Pre-Configure by Chisdealhd, so not only musicbot got few client stuff too.
+This bot Pre-Configure by Chisdealhd & Bacon_Space, so not only musicbot got few client stuff too.
 
 This Musicbot will require: Node.js, Git, discord.js#v8, FFMPEG, ytdl-core, mathjs, Python 2.7 (optional) and main bot needs Discord.js Latest
 
