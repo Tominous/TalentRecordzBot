@@ -1,8 +1,8 @@
 {
-  "token": "BotTOKEN",
+  "token": "BotToken",
   "client_id": "BotID",
-  "prefix": "!*",
-  "owner_id": "OWNERID",
+  "prefix": "Prefix",
+  "owner_id": "OwnerID",
   "youtube_api_key": "YoutubeAPI",
   "twitch_api_key": "TwitchclientID",
   "admins": ["UserID", "UserID", "UserID", "UserID", "UserID"],
