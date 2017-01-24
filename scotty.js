@@ -41,7 +41,7 @@ client.on('message', message => {
     },
     {
       name: 'Partnerships',
-      value: 'We dont have Parnerships YET!.'
+      value: 'Roboto: http://discord.io/Roboto'
     }
   ],
   timestamp: new Date(),
