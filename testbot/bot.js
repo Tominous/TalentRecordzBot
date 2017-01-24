@@ -196,7 +196,7 @@ bot.on("message", function(message) {
             timestr += secs + " seconds ";
         }
 		var servers = bot.servers.length.toString();
-		var owners = "ChisdealHD_YT Harry";
+		var owners = "ChisdealHD_YT|Harry|Bacon_Space";
 		var timme = [user.length, id.length, timestr.length, servers.length, owners.length];
 		var long = timme.sort(function(a, b){return b-a});
 	    var string = "═".repeat(parseInt(timme[0]));
