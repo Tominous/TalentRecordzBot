@@ -33,7 +33,7 @@ client.on('message', message => {
   fields: [
     {
       name: 'Created',
-      value: 'This bot been Created by ChisdealHD_YT in Discord.js.'
+      value: 'This bot been Created by ChisdealHD_YT & Bacon_Space in Discord.js.'
     },
     {
       name: 'Website',
