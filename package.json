@@ -1,29 +1,29 @@
 {
-  "name": "TalentRecordz",
-  "version": "1.0.0",
-  "description": "A simple node.js discord bot",
-  "main": "scotty.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com:ChisdealHD/TalentRecordzBot.git"
-  },
-  "keywords": [
-    "bot",
-    "discord",
-    "node.js",
-    "npm"
-  ],
-  "author": "ChisdealHD",
-  "contributors": "Bacon_Space",
-  "license": "I put License in folder",
-  "bugs": {
-    "url": "https://github.com/ChisdealHD/TalentRecordzBot/issues"
-  },
-  "homepage": "https://github.com/ChisdealHD/TalentRecordzBot#readme",
-  "dependencies": {
-    "discord.js": "hydrabolt/discord.js"
-  }
+	"name": "talentrecordz",
+	"version": "1.0.0",
+	"description": "A simple node.js discord bot",
+	"main": "scotty.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com:ChisdealHD/TalentRecordzBot.git"
+	},
+	"keywords": [
+		"bot",
+		"discord",
+		"node.js",
+		"npm"
+	],
+	"author": "ChisdealHD",
+	"contributors": "Bacon_Space",
+	"license": "I put License in folder",
+	"bugs": {
+		"url": "https://github.com/ChisdealHD/TalentRecordzBot/issues"
+	},
+	"homepage": "https://github.com/ChisdealHD/TalentRecordzBot#readme",
+	"dependencies": {
+		"discord.js": "hydrabolt/discord.js"
+	}
 }
