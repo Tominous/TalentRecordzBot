@@ -22,6 +22,7 @@ try {
             "owner_id": config.owner_id,
             "status": "Musicccc",
             "youtube_api_key": config.youtube_api_key,
+	    "twitch_api_key": config.twitch_api_key,
             "admins": admins
         }
     } else {
@@ -34,6 +35,8 @@ const bot = new Discord.Client()
 const notes = require('./data/notes.json')
 const os = require('os')
 const prefix = config.prefix;
+const ytkey = config.youtube_api_key;
+const twitchkey = config.twitch_api_key;
 const rb = "```"
 const sbl = require("./data/blservers.json")
 const ubl = require("./data/blusers.json")
@@ -675,7 +678,7 @@ ${prefix}sys - Gets system information${rb}`)
             message.channel.sendMessage("My OAuth URL: " + `http://discordapp.com/oauth2/authorize?client_id=${config.client_id}&scope=bot`)
         }
         if (message.content.startsWith(prefix + 'git')) {
-            message.channel.sendMessage("GitHub URL: **https://github.com/JoeBanks13/Music-Butt**")
+            message.channel.sendMessage("GitHub URL: **https://github.com/ChisdealHD/TalentRecordzBot**")
         }
 		
 	if (message.content === ":kappa") {
@@ -972,22 +975,6 @@ ${prefix}sys - Gets system information${rb}`)
     var url = "https://www.google.com/search?q=" + searchQuery;
     message.channel.sendMessage(url + "\n Here Is Your Search!");
     }
-	if (message.content.startsWith(prefix + 'b@G')) {
-    request("http://badatgaming.com/api/stats.php",
-    function(err,res,body){
-              var data = JSON.parse(body);
-              if(data.network){
-                  message.channel.sendMessage(""
-                      +" Stats of Badatgaming. "
-                      +"\n Channels: "+data.network.channels
-                      +"\n Followers: "+data.network.Followers
-                      +"\n Total Views: "+data.network.Views
-                      +"\n Live Views: "+data.network.live)
-              }else{
-                message.channel.sendMessage("Database is offline")
-            }
-        });
-    }
 	if (message.content.startsWith(prefix1 + "8ball")) {
 		var suffix = message.content.split(" ").slice(1).join(" ");
       if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
@@ -1012,7 +999,7 @@ ${prefix}sys - Gets system information${rb}`)
 	if(message.content.startsWith(prefix + "twitch")) {
       var suffix = message.content.split(" ").slice(1).join(" ");
       if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "twitch <username?> for Online Status!");
-      request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id=t8f8b48pgn7ecj7g1rappb03xx389ai",
+      request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id="+twitchkey,
 			function(err,res,body){
 				if(err) {
 					console.log('Error encounterd: '+err);
@@ -1033,13 +1020,13 @@ ${prefix}sys - Gets system information${rb}`)
     }
 	if(message.content.startsWith(prefix + "sub")) {
         var id = message.content.split(" ").slice(1).join(" ");
-        request("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+id+"&key=AIzaSyDHX7lpuPj-dX3dlr9psH3FmRQCtWkx2E8", function(err, resp, body) {
+        request("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+id+"&key="+ytkey, function(err, resp, body) {
             try{
                 var parsed = JSON.parse(body);
                 if(parsed.pageInfo.resultsPerPage != 0){
                     for(var i = 0; i < parsed.items.length; i++){
                         if(parsed.items[i].id.channelId) {
-                            request("https://www.googleapis.com/youtube/v3/channels?part=statistics&id="+parsed.items[i].id.channelId+"&key=AIzaSyDHX7lpuPj-dX3dlr9psH3FmRQCtWkx2E8", function(err, resp, body) {
+                            request("https://www.googleapis.com/youtube/v3/channels?part=statistics&id="+parsed.items[i].id.channelId+"&key="+ytkey, function(err, resp, body) {
                                 var sub = JSON.parse(body);
                                 if(sub.pageInfo.resultsPerPage != 0){
                                     message.channel.sendMessage("YouTube SUBSCRIBERS: **" + sub.items[0].statistics.subscriberCount + "**");
