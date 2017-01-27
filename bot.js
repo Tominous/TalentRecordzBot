@@ -14,15 +14,15 @@ try {
 } catch (err) {
     console.log(err);
     console.log("No config detected, attempting to use environment variables...");
-    if (process.env.MUSIC_BOT_TOKEN && process.env.YOUTUBE_API_KEY) {
+    if (config.token && config.youtube_api_key) {
         var config = {
-            "token": process.env.MUSIC_BOT_TOKEN,
-            "client_id": "241966505334407168",
-            "prefix": "&!",
-            "owner_id": "171319044715053057",
+            "token": config.token,
+            "client_id": config.client_id,
+            "prefix": config.prefix,
+            "owner_id": config.owner_id,
             "status": "Musicccc",
-            "youtube_api_key": process.env.YOUTUBE_API_KEY,
-            "admins": ["165023948638126080"]
+            "youtube_api_key": config.youtube_api_key,
+            "admins": admins
         }
     } else {
         console.log("No token passed! Exiting...")
