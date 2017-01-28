@@ -37,6 +37,7 @@ const os = require('os')
 const prefix = config.prefix;
 const ytkey = config.youtube_api_key;
 const twitchkey = config.twitch_api_key;
+const serverport = config.server_port;
 const rb = "```"
 const sbl = require("./data/blservers.json")
 const ubl = require("./data/blusers.json")
@@ -1125,7 +1126,7 @@ app.get('/date', function(req, res){ res.send("Talntrecordz Date is "+ started +
 app.get('/uptime', function(req, res){ res.send("Talntrecordz Has Been Up For "+ started +""); });
 app.get('/specs', function(req, res){ res.send("xl\nSystem info: " + process.platform + "-" + process.arch + " with " + process.release.name + " version " + process.version.slice(1) + "\nProcess info: PID " + process.pid + " at " + process.cwd() + "\nProcess memory usage: " + Math.ceil(process.memoryUsage().heapTotal / 1000000) + " MB\nSystem memory usage: " + Math.ceil((os.totalmem() - os.freemem()) / 1000000) + " of " + Math.ceil(os.totalmem() / 1000000) + " MB\nBot info: ID " + bot.user.id + " #" + bot.user.discriminator + "\n") });
 
-app.listen(process.env.PORT || 8082);
+app.listen(process.env.PORT || ${serverport});
 // END Roboto SETUP
 
 process.on("unhandledRejection", err => {
