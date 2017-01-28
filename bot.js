@@ -868,10 +868,6 @@ ${prefix}sys - Gets system information${rb}`)
       value: data1.name
     },
 	{
-      name: 'Game:',
-      value: data1.type.name
-    },
-	{
       name: 'Live viewers:',
       value: data1.viewersCurrent
     },
