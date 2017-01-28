@@ -30,7 +30,6 @@
 		"youtube-search": "^1.0.6",
 		"mathjs": "^3.5.3",
 		"ytdl-core": "^0.7.17",
-		"express": "^4",
 		"cheerio": "^0.22.0",
 		"request": "^2.79.0",
 		"node-opus": "^0.2.4",
