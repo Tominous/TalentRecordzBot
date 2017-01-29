@@ -1,6 +1,6 @@
 # TalentRecordzBot [![DUB](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](https://github.com/ChisdealHD/TalentRecordzBot)
 [![Twitter Follow](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Follow)](http://twitter.com/chisdeal2013)
-[![Donate US](https://img.shields.io/gratipay/Shields.svg?style=social&label=Donate)](http://streamjar.tv/tip/chisdealhd)
+[![Donate US](https://img.shields.io/badge/Donate%20US-Goal%20%243000%20support!-blue.svg)](http://streamjar.tv/tip/chisdealhd)
 
 <img src="https://cdn.discordapp.com/attachments/263639645647142912/264362236913516545/vaavassvasv_copy.png" alt="TakentRecordz" style="width:50px;height:50px;">
 
