@@ -13,19 +13,20 @@ This Musicbot will require: Node.js, Git, discord.js, FFMPEG, ytdl-core, mathjs,
 To make bot work.
 
 Linux
-Make new folder "mkdir name"
-go inside folder "cd name"
-do this command "git clone https://github.com/ChisdealHD/TalentRecordzBot.git"
+Make new folder ```mkdir name```
+go inside folder ```cd name```
+do this command ```git clone https://github.com/ChisdealHD/TalentRecordzBot.git```
 then folder be TalentRecordzBot-master so do "cd TalentRecordzBot-master" = if folder not called that do "ls" see whats called.
-
+```Javascript
 then "npm Install"
-
+```
 inside that folder will see config.json you need edit that folder inside with BOT TOKEN, YoutubeAPI, TwitchAPI, OWNERID, BOT CLIENTID, PREFIX, PORT< and AdminsID. by do that is "sudo nano config.json"
-
+```Javascript
 then do "C+X and Y and Enter"
-
+```
+```Javascript
 after that then "node bot.js" and bam your finished
-
+```
 
 i dont really know if  works as windows computers but give a try still.
 
