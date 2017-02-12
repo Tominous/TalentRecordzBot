@@ -47,7 +47,6 @@ const queues = {}
 const ytdl = require('ytdl-core')
 const search = require('youtube-search')
 const prefix1 = "hey talent, ";
-const opus = require('opusscript')
 const request = require('request')
 const cheerio = require('cheerio')
 const express = require('express')
