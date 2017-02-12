@@ -22,7 +22,7 @@ then folder be TalentRecordzBot-master so do "cd TalentRecordzBot-master" = if f
 ```Javascript
 then "npm Install"
 ```
-inside that folder will see config.json you need edit that folder inside with BOT TOKEN, YoutubeAPI, TwitchAPI, OWNERID, BOT CLIENTID, PREFIX, PORT< and AdminsID. by do that is "sudo nano config.json"
+inside that folder will see config-sample.json change to config.json you need edit that folder inside with BOT TOKEN, YoutubeAPI, TwitchAPI, OWNERID, BOT CLIENTID, PREFIX, PORT< and AdminsID. by do that is "sudo nano config.json"
 ```Javascript
 then do "C+X and Y and Enter"
 ```
