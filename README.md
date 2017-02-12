@@ -18,6 +18,7 @@ Linux
 Make new folder ```mkdir name```
 go inside folder ```cd name```
 do this command ```git clone https://github.com/ChisdealHD/TalentRecordzBot.git```
+download this files and extract it and put 2 .exe inside bot ```http://talentrecordz.uk.to/downloads/ffmpeg.zip```
 then folder be TalentRecordzBot-master so do "cd TalentRecordzBot-master" = if folder not called that do "ls" see whats called.
 ```Javascript
 then "npm Install"
