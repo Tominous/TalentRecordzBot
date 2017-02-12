@@ -48,6 +48,7 @@ const ytdl = require('ytdl-core')
 const search = require('youtube-search')
 const prefix1 = "hey talent, ";
 const request = require('request')
+const opus = require('opusscript')
 const cheerio = require('cheerio')
 const express = require('express')
   , logger = require('morgan')
