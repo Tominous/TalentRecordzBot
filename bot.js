@@ -104,6 +104,11 @@ function play(msg, queue, song) {
                 let stream = ytdl(song, {
                     audioonly: true
                 })
+
+                stream.on('error', function(error) {
+                    return msg.channel.sendMessage("Could not play video.");
+                })
+                
                 let test
                 if (queue.length === 0) test = true
                 queue.push({
