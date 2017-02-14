@@ -304,6 +304,15 @@ bot.on("message", function(message) {
                 message.channel.sendMessage('Only Owners and admins can set Streaming!');
             }
         }
+	if (message.content.startsWith(prefix + 'sleeping')) {
+            if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
+					let suffix = message.content.split(" ").slice(1).join(" ");
+					bot.user.setGame(suffix+ ' Is Sleeping DM him if needed | Do '+prefix+'help for More!','https://twitch.tv/'+suffix)
+					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Sleeping")
+            } else {
+                message.channel.sendMessage('Only Owners and admins can set Streaming!');
+            }
+        }
         if (message.content.startsWith(prefix + "ping")) {
             var before = Date.now()
             message.channel.sendMessage("Pong!").then(function(msg) {
