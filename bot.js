@@ -303,39 +303,33 @@ bot.on("message", function(message) {
             })
         }
         if (message.content.startsWith(prefix + 'help')) {
-            message.channel.sendMessage("Check your DM's **" + message.author.username + "**")
-            message.author.sendMessage(`${rb}ruby
-${prefix}help - Shows this message.
-${prefix}ping - Ping/Pong with ms amount.
-${prefix}servers Shows amount of servers.
-${prefix}play - Plays the song you requested.
-${prefix}voteskip - You may vote to skip a song.
-${prefix}volume <volume> - Change the volume.
-${prefix}queue - Check the list of songs that are queued.
-${prefix}np/nowplaying - Check the current song out.
-${prefix}skip - Skips the playing song.
-${prefix}pause - Pause the current song.
-${prefix}deletewarn <user> - Deletes a warning from a user.
-${prefix}lookupwarn <user> - Lookup warning information on a user.
-${prefix}eval - Owner only.
-${prefix}clearqueue - Clears the list of queues.
-${prefix}say - Admin only.
-${prefix}resume - Resumes paused song.
-${prefix}about - Info about the bot
-${prefix}shutdown - Power off the bot (Owner only).
-${prefix}invite - Creates OAuth URL for bot.
-${prefix}git - Sends link to github repo.
-${prefix}play - Plays a link that you have wanted it to.
-${prefix}userblacklist <add/remove> <user id> - Blacklists a user
-${prefix}warn <user> <reason> - Warns a user for the thing they did wrong.
-${prefix}reminder <time>|<reminder> - Reminds you of something in a certain time
-${prefix}serverblacklist <add/remove> <server id> - Adds or removes servers from blacklist
-${prefix}note - Takes a note
-${prefix}mynotes - Shows notes you have taken
-${prefix}math <maths> - evaluates math equations
-${prefix}uptime - Shows bot uptime
-${prefix}sys - Gets system information${rb}`)
-        }
+            message.channel.sendMessage({embed: {
+  color: 2590000,
+  author: {
+    name: bot.user.username,
+    icon_url: bot.user.avatarURL
+  },
+  title: 'Commands',
+  url: 'https://docs.google.com/spreadsheets/d/1FIdXM5jG7QauYyiS3y92a-UCRapRmq8yl1axNzQZyN4/edit#gid=0',
+  description: 'Where all commands Kept at.',
+  fields: [
+    {
+      name: 'Running on:',
+      value: process.release.name + ' version ' + process.version.slice(1)
+    },
+    {
+      name: ' Created in Discord.js',
+	  value: ' Version: ' + Discord.version + ' [DiscordJS](https://github.com/hydrabolt/discord.js/).'
+    }
+    ],
+      timestamp: new Date(),
+  footer: {
+    icon_url: bot.user.avatarURL,
+    text: '© TalentRecordz'
+  }
+}});
+  })
+}
         if (message.content.startsWith(prefix + 'servers')) {
             message.channel.sendMessage("I'm currently on **" + bot.guilds.size + "** server(s)")
         }
