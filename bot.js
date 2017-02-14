@@ -327,6 +327,8 @@ bot.on("message", function(message) {
     icon_url: bot.user.avatarURL,
     text: '© TalentRecordz'
   }
+}});
+  }
         if (message.content.startsWith(prefix + 'servers')) {
             message.channel.sendMessage("I'm currently on **" + bot.guilds.size + "** server(s)")
         }
