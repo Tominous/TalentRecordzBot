@@ -359,6 +359,7 @@ ${prefix}sys - Gets system information${rb}`)
             var chan = message.member.voiceChannel
 	    let player = message.guild.voiceConnection.player.dispatcher
             player.pause()
+	    player.end()
             chan.leave()
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
