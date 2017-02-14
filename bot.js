@@ -362,8 +362,6 @@ ${prefix}sys - Gets system information${rb}`)
                 chan.disconnect()
             }
             message.channel.sendMessage(':wave: :'( no music then :(, well im all alone!')
-
-            play(message, getQueue(message.guild.id), suffix)
         }
 
         if (message.content.startsWith(prefix + 'sys')) {
