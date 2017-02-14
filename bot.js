@@ -361,7 +361,7 @@ ${prefix}sys - Gets system information${rb}`)
                 var chan = message.member.voiceChannel
                 chan.disconnect()
             }
-            message.channel.sendMessage(':wave: :'( no music then :(, well im all alone!')
+            message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
 
         if (message.content.startsWith(prefix + 'sys')) {
