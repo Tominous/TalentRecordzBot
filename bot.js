@@ -1062,9 +1062,8 @@ bot.on("message", function(message) {
     name: bot.user.username,
     icon_url: bot.user.avatarURL
   },
-  title: 'Commands',
-  url: 'https://docs.google.com/spreadsheets/d/1FIdXM5jG7QauYyiS3y92a-UCRapRmq8yl1axNzQZyN4/edit#gid=0',
-  description: 'Where all commands Kept at.',
+  title: 'Server Infomation!',
+  description: 'Where all Server Infomation.',
   fields: [
     {
       name: 'System info:',
