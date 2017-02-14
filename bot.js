@@ -300,6 +300,8 @@ bot.on("message", function(message) {
 					let suffix = message.content.split(" ").slice(1).join(" ");
 					bot.user.setGame(suffix+ ' Is now LIVE! | Do '+prefix+'help for More!','https://twitch.tv/'+suffix)
 					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Streaming")
+            } else {
+                message.channel.sendMessage('Only Owners and admins can set Streaming!');
             }
         }
         if (message.content.startsWith(prefix + "ping")) {
