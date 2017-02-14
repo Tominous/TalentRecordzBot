@@ -358,7 +358,7 @@ ${prefix}sys - Gets system information${rb}`)
 	if (message.content.startsWith(prefix + 'stop')) {
             var chan = message.member.voiceChannel
 	    let player = message.guild.voiceConnection.player.dispatcher
-            player.stop()
+            player.pause()
             chan.leave()
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
