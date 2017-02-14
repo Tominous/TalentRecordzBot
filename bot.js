@@ -362,6 +362,7 @@ ${prefix}sys - Gets system information${rb}`)
             player.pause()
 	    for (var i = queue.length - 1; i >= 0; i--) {
             queue.splice(i, 1);
+	    }
             chan.leave()
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
