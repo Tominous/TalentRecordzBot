@@ -357,7 +357,7 @@ ${prefix}sys - Gets system information${rb}`)
 	
 	if (message.content.startsWith(prefix + 'stop')) {
             var chan = message.member.voiceChannel
-            chan.leave()
+            chan.disconnect()
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
 
