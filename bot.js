@@ -354,6 +354,17 @@ ${prefix}sys - Gets system information${rb}`)
 
             play(message, getQueue(message.guild.id), suffix)
         }
+	
+	if (message.content.startsWith(prefix + 'stop')) {
+            if (!message.guild.voiceConnection) {
+                if (!message.member.voiceChannel) return message.channel.sendMessage('You need to be in a voice channel to stop Music!')
+                var chan = message.member.voiceChannel
+                chan.disconnect()
+            }
+            message.channel.sendMessage(':wave: :'( no music then :(, well im all alone!')
+
+            play(message, getQueue(message.guild.id), suffix)
+        }
 
         if (message.content.startsWith(prefix + 'sys')) {
             message.channel.sendMessage("```xl\nSystem info: " + process.platform + "-" + process.arch + " with " + process.release.name + " version " + process.version.slice(1) + "\nProcess info: PID " + process.pid + " at " + process.cwd() + "\nProcess memory usage: " + Math.ceil(process.memoryUsage().heapTotal / 1000000) + " MB\nSystem memory usage: " + Math.ceil((os.totalmem() - os.freemem()) / 1000000) + " of " + Math.ceil(os.totalmem() / 1000000) + " MB\nBot info: ID " + bot.user.id + " #" + bot.user.discriminator + "\n```");
