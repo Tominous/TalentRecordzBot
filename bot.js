@@ -358,8 +358,10 @@ ${prefix}sys - Gets system information${rb}`)
 	if (message.content.startsWith(prefix + 'stop')) {
             var chan = message.member.voiceChannel
 	    let player = message.guild.voiceConnection.player.dispatcher
+	    let queue = getQueue(message.guild.id);
             player.pause()
-	    player.end()
+	    for (var i = queue.length - 1; i >= 0; i--) {
+            queue.splice(i, 1);
             chan.leave()
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
