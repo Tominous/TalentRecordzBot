@@ -303,7 +303,7 @@ bot.on("message", function(message) {
             })
         }
         if (message.content.startsWith(prefix + 'help')) {
-            message.channel.sendMessage({embed: {
+            message.channel.sendMessage("", {embed: {
   color: 2590000,
   author: {
     name: bot.user.username,
@@ -328,8 +328,9 @@ bot.on("message", function(message) {
     text: '© TalentRecordz'
   }
 }});
-  })
-}
+  }
+  });
+  }
         if (message.content.startsWith(prefix + 'servers')) {
             message.channel.sendMessage("I'm currently on **" + bot.guilds.size + "** server(s)")
         }
