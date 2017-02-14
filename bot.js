@@ -356,11 +356,8 @@ ${prefix}sys - Gets system information${rb}`)
         }
 	
 	if (message.content.startsWith(prefix + 'stop')) {
-            if (!message.guild.voiceConnection) {
-                if (!message.member.voiceChannel) return message.channel.sendMessage('You need to be in a voice channel to stop Music!')
-                var chan = message.member.voiceChannel
-                chan.leave()
-            }
+            var chan = message.member.voiceChannel
+            chan.leave()
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
 
