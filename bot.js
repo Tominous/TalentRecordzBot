@@ -36,6 +36,7 @@ const notes = require('./data/notes.json')
 const os = require('os')
 const prefix = config.prefix;
 const ytkey = config.youtube_api_key;
+const client_id = config.client_id;
 const twitchkey = config.twitch_api_key;
 const serverport = config.server_port;
 const rb = "```"
@@ -210,7 +211,7 @@ function isCommander(id) {
 
 bot.on('ready', function() {
     try {
-        config.client_id = bot.user.id;
+        config.client_id = client_id;
         bot.user.setStatus('online', config.status)
         var msg = `
 ------------------------------------------------------
