@@ -1,7 +1,7 @@
 /*
- * Uncle Joe's Music Butt
- * Developed by Joseph and ASIANBOI with a few contributions by ZelAk32 and Hackzilla
- * Visit https://discord.gg/WAzJfJT for more information.
+ * Chis's Music Bot
+ * Developed by ChisdealHD & Bacon_Space
+ * Visit https://discord.gg/QWuVhAD for more information.
  */
 var errorlog = require("./data/errors.json")
 
@@ -294,6 +294,13 @@ bot.on("message", function(message) {
         if (ubl.indexOf(message.author.id) != -1 && message.content.startsWith(prefix)) {
             message.reply(" you are blacklisted and can not use the bot!")
             return
+        }
+	if (message.content.startsWith(prefix + 'setstream')) {
+            if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
+					let suffix = message.content.split(" ").slice(1).join(" ");
+					bot.user.setGame(suffix+ ' Is now LIVE! | Do '+prefix+'help for More!','https://twitch.tv/'+suffix)
+					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Streaming")
+            }
         }
         if (message.content.startsWith(prefix + "ping")) {
             var before = Date.now()
