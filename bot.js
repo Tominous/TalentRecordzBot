@@ -909,6 +909,10 @@ bot.on("message", function(message) {
       value: data1.user.level
     },
 	{
+      name: 'Sparks:',
+      value: data1.user.sparks
+    },
+	{
       name: 'AGE Rate:',
       value: data1.audience
     },
