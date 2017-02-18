@@ -386,6 +386,7 @@ bot.on("message", function(message) {
             queue.splice(i, 1);
 	    }
             chan.leave()
+	    bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/chisdealhd')
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
 
