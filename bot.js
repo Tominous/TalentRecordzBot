@@ -261,7 +261,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 					var game = bot.user.presence.game.name;
                     delete paused[svr[i].voiceConnection.channel.id]
                     game = game.split("⏸")[1];
-					bot.user.setGame(game);
+					bot.user.setGame('Play Youtube Music: '+game,'https://twitch.tv/chisdealhd');
                 }
             }
             if (svr[i].voiceConnection.channel.members.size === 1 && !svr[i].voiceConnection.player.dispatcher.paused) {
@@ -271,7 +271,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
                 paused[svr[i].voiceConnection.channel.id] = {
                     "player": svr[i].voiceConnection.player.dispatcher
                 }
-                bot.user.setGame("⏸ " + game);
+                bot.user.setGame("⏸ " + game,'https://twitch.tv/chisdealhd');
             }
         }
     }
