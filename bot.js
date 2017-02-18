@@ -212,7 +212,7 @@ function isCommander(id) {
 bot.on('ready', function() {
     try {
         config.client_id = client_id;
-        bot.user.setStatus('online', config.status)
+        bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/chisdealhd')
         var msg = `
 ------------------------------------------------------
 > Do 'git pull' periodically to keep your bot updated!
@@ -278,7 +278,6 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 });
 
 bot.on("message", function(message) {
-	const user = message.author.username;
     try {
         if (message.author.bot) return
 		if (message.channel.type === "dm") return;
