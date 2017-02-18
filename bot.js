@@ -313,6 +313,16 @@ bot.on("message", function(message) {
                 message.channel.sendMessage('Only Owners and admins can set Streaming!');
             }
         }
+	if (message.content.startsWith(prefix + 'status')) {
+            if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
+					let suffix = message.content.split(" ").slice(1).join(" ")
+					var user = message.author.username;
+					bot.user.setGame(suffix ,'https://twitch.tv/'+user)
+					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Status")
+            } else {
+                message.channel.sendMessage('Only Owners and admins can set Status!');
+            }
+        }
         if (message.content.startsWith(prefix + "ping")) {
             var before = Date.now()
             message.channel.sendMessage("Pong!").then(function(msg) {
