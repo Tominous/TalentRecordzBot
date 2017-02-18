@@ -344,7 +344,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }
@@ -936,7 +936,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }else{
@@ -958,7 +958,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }
@@ -1111,7 +1111,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }
