@@ -107,7 +107,7 @@ function play(msg, queue, song) {
                 })
 
                 stream.on('error', function(error) {
-                    return msg.channel.sendMessage("Could not play video.");
+                    return msg.channel.sendMessage("Could not play video, or Video is Private. Please try another URL or SONGNAME!");
                 })
                 
                 let test
