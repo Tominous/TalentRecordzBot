@@ -128,7 +128,7 @@ function play(msg, queue, song) {
         } else if (queue.length != 0) {
             msg.channel.sendMessage(`Now Playing **${queue[0].title}** | Requested by ***${queue[0].requested}***`)
             console.log(`Playing ${queue[0].title} as requested by ${queue[0].requested} in ${msg.guild.name}`);
-            bot.user.setGame(queue[0].title);
+            bot.user.setGame('Play Youtube Music: 'queue[0].title,'https://twitch.tv/chisdealhd');
             let connection = msg.guild.voiceConnection
             if (!connection) return console.log("No Connection!");
             intent = connection.playStream(queue[0].toplay)
@@ -261,7 +261,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 					var game = bot.user.presence.game.name;
                     delete paused[svr[i].voiceConnection.channel.id]
                     game = game.split("⏸")[1];
-					bot.user.setGame('Play Youtube Music: '+game,'https://twitch.tv/chisdealhd');
+					bot.user.setGame(+game,'https://twitch.tv/chisdealhd');
                 }
             }
             if (svr[i].voiceConnection.channel.members.size === 1 && !svr[i].voiceConnection.player.dispatcher.paused) {
