@@ -40,6 +40,7 @@ const client_id = config.client_id;
 const twitchkey = config.twitch_api_key;
 const serverport = config.server_port;
 const rb = "```"
+const user = message.author.username;
 const sbl = require("./data/blservers.json")
 const ubl = require("./data/blusers.json")
 const fs = require("fs")
