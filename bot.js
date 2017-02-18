@@ -40,7 +40,6 @@ const client_id = config.client_id;
 const twitchkey = config.twitch_api_key;
 const serverport = config.server_port;
 const rb = "```"
-const user = message.author.username;
 const sbl = require("./data/blservers.json")
 const ubl = require("./data/blusers.json")
 const fs = require("fs")
@@ -279,6 +278,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 });
 
 bot.on("message", function(message) {
+	const user = message.author.username;
     try {
         if (message.author.bot) return
 		if (message.channel.type === "dm") return;
