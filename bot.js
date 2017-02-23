@@ -1165,7 +1165,7 @@ bot.on('ready', function() {
         });
     });
 }, 120000)
-});
+})
 
 bot.login(config.token)
 
