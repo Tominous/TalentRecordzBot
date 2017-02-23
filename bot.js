@@ -153,7 +153,7 @@ function play(msg, queue, song) {
 
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/WAzJfJT) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -237,7 +237,7 @@ LET'S GO!
         }
         console.log("------------------------------------------------------")
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/WAzJfJT) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -288,7 +288,7 @@ bot.on("message", function(message) {
                 return;
             }
         if (sbl.indexOf(message.guild.id) != -1 && message.content.startsWith(prefix)) {
-            message.channel.sendMessage("This server is blacklisted fucker!")
+            message.channel.sendMessage("This server is blacklisted Congratz on Blacklist Unit!")
             return
         }
         if (ubl.indexOf(message.author.id) != -1 && message.content.startsWith(prefix)) {
@@ -827,40 +827,40 @@ bot.on("message", function(message) {
 	if (message.content === ":feelsgoodman") {
         message.channel.sendFile("./images/emotes/feelsgoodman.png")
     }
-    if (message.content === ":thecreedsclan") {
+        if (message.content === ":thecreedsclan") {
         message.channel.sendFile("./images/emotes/LOGO.png")
     }
-    if (message.content === ":ampenergycherry") {
+        if (message.content === ":ampenergycherry") {
         message.channel.sendFile("./images/emotes/AMPEnergyCherry.png")
     }
-    if (message.content === ":argieb8") {
+    	if (message.content === ":argieb8") {
         message.channel.sendFile("./images/emotes/ArgieB8.png")
     }
-    if (message.content === ":biblethump") {
+    	if (message.content === ":biblethump") {
         message.channel.sendFile("./images/emotes/biblethump.png")
     }
-    if (message.content === ":biersderp") {
+    	if (message.content === ":biersderp") {
         message.channel.sendFile("./images/emotes/biersderp.png")
     }
-    if (message.content === ":kapow") {
+    	if (message.content === ":kapow") {
         message.channel.sendFile("./images/emotes/kapow.png")
     }
-    if (message.content === ":lirik") {
+    	if (message.content === ":lirik") {
         message.channel.sendFile("./images/emotes/lirik.png")
     }
-    if (message.content === ":mau5") {
+    	if (message.content === ":mau5") {
         message.channel.sendFile("./images/emotes/Mau5.png")
     }
-    if (message.content === ":mcat") {
+    	if (message.content === ":mcat") {
         message.channel.sendFile("./images/emotes/mcaT.png")
     }
-    if (message.content === ":pjsalt") {
+    	if (message.content === ":pjsalt") {
         message.channel.sendFile("./images/emotes/PJSalt.png")
     }
-    if (message.content === ":pjsugar") {
+    	if (message.content === ":pjsugar") {
         message.channel.sendFile("./images/emotes/PJSugar.png")
     }
-    if (message.content === ":twitchRaid") {
+    	if (message.content === ":twitchRaid") {
         message.channel.sendFile("./images/emotes/twitchraid.png")
     }
 	if (message.content === ":gaben") {
@@ -869,7 +869,7 @@ bot.on("message", function(message) {
 	if (message.content === ":twitch") {
         message.channel.sendFile("./images/emotes/twitch.png")
     }
-    if (message.content === ":Illuminati") {
+    	if (message.content === ":Illuminati") {
         message.channel.sendFile("./images/emotes/Illuminati.png")
     }
 	if (message.content === ":dableft") {
@@ -878,11 +878,11 @@ bot.on("message", function(message) {
 	if (message.content === ":dabright") {
         message.channel.sendFile("./images/emotes/dabright.png")
     }
-    if (message.content === prefix + "donate"){
+    	if (message.content === prefix + "donate"){
         message.channel.sendMessage("Donate  HERE! show some LOVE <3 https://streamjar.tv/tip/chisdealhd")
     }
 	
-		if (message.content.startsWith(prefix + 'beam')) {
+	if (message.content.startsWith(prefix + 'beam')) {
 	  var suffix1 = message.content.split(" ").slice(1).join(" ");
 	  if(suffix1 == "" || suffix1 == null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
     request("https://beam.pro/api/v1/channels/"+suffix1,
@@ -1140,7 +1140,7 @@ bot.on("message", function(message) {
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/WAzJfJT) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -1169,5 +1169,5 @@ app.listen(process.env.PORT || + serverport);
 // END Roboto SETUP
 
 process.on("unhandledRejection", err => {
-    console.error("Uncaught We had a promise error, if this keeps happening report to dev server: \n" + err.stack);
+    console.error("Uncaught We had a promise error, if this keeps happening report to dev server (https://discord.gg/EX642f8): \n" + err.stack);
 });
