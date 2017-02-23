@@ -1,0 +1,3 @@
+'Do ' +Prefix+ 'help for commands'
+'Musicbot in Beta, there will be few bugs round it'
+'This bot Custom Made with Few Scripts of other bot and Musicbot was made by JoeBanks13'
