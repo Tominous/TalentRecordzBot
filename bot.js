@@ -1158,7 +1158,7 @@ bot.on('ready', function() {
         fs.readFile('./status.txt', 'utf8', function(err, data) {
         var games = data.toString().split('\n')
         bot.user.setGame(games[Math.floor(Math.random()* games.length)],'https://twitch.tv/chisdealhd'), function(err) {
-            console.log(games)
+        console.log(games)
             if (err) {
                 message.channel.sendMessage("ERROR has be MADE!" + err);
             }
