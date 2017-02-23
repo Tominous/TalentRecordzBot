@@ -1162,10 +1162,10 @@ bot.on('ready', function() {
             if (err) {
                 message.channel.sendMessage("ERROR has be MADE!" + err);
             }
-        });
+        })
     });
 }, 120000)
-})
+});
 
 bot.login(config.token)
 
