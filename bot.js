@@ -1167,8 +1167,6 @@ bot.on('ready', function() {
 }, 120000)
 });
 
-bot.user.setGame('Playing: ' +queue[0].title+' | Connected servers: '+bot.guilds.size,'https://twitch.tv/chisdealhd');
-
 bot.login(config.token)
 
 // START Roboto SETUP
