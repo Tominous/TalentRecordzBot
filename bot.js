@@ -1153,6 +1153,22 @@ bot.on("message", function(message) {
     }
 })
 
+bot.on('ready', function() {
+	setInterval(() => {
+        fs.readFile('./status.txt', 'utf8', function(err, data) {
+        var games = data.toString().split('\n')
+        bot.user.setGame(games[Math.floor(Math.random()* games.length)],'https://twitch.tv/chisdealhd'), function(err) {
+            console.log(games)
+            if (err) {
+                message.channel.sendMessage("ERROR has be MADE!" + err);
+            }
+        });
+    });
+}, 120000)
+});
+
+bot.user.setGame('Playing: ' +queue[0].title+' | Connected servers: '+bot.guilds.size,'https://twitch.tv/chisdealhd');
+
 bot.login(config.token)
 
 // START Roboto SETUP
