@@ -38,6 +38,7 @@ const prefix = config.prefix;
 const ytkey = config.youtube_api_key;
 const client_id = config.client_id;
 const twitchkey = config.twitch_api_key;
+const twitchusername = config.twitchusername;
 const serverport = config.server_port;
 const rb = "```"
 const sbl = require("./data/blservers.json")
@@ -128,7 +129,7 @@ function play(msg, queue, song) {
         } else if (queue.length != 0) {
             msg.channel.sendMessage(`Now Playing **${queue[0].title}** | Requested by ***${queue[0].requested}***`)
             console.log(`Playing ${queue[0].title} as requested by ${queue[0].requested} in ${msg.guild.name}`);
-            bot.user.setGame('Playing: ' +queue[0].title+' | Connected servers: '+bot.guilds.size,'https://twitch.tv/chisdealhd');
+            bot.user.setGame('Playing: ' +queue[0].title+' | Connected servers: '+bot.guilds.size,'https://twitch.tv/'+twitchusername);
             let connection = msg.guild.voiceConnection
             if (!connection) return console.log("No Connection!");
             intent = connection.playStream(queue[0].toplay)
@@ -261,7 +262,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 					var game = bot.user.presence.game.name;
                     delete paused[svr[i].voiceConnection.channel.id]
                     game = game.split("⏸")[1];
-					bot.user.setGame(+game,'https://twitch.tv/chisdealhd');
+					bot.user.setGame(+game,'https://twitch.tv/'+twitchusername);
                 }
             }
             if (svr[i].voiceConnection.channel.members.size === 1 && !svr[i].voiceConnection.player.dispatcher.paused) {
@@ -271,7 +272,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
                 paused[svr[i].voiceConnection.channel.id] = {
                     "player": svr[i].voiceConnection.player.dispatcher
                 }
-                bot.user.setGame("⏸ " + game,'https://twitch.tv/chisdealhd');
+                bot.user.setGame("⏸ " + game,'https://twitch.tv/'+twitchusername);
             }
         }
     }
@@ -307,7 +308,7 @@ bot.on("message", function(message) {
 	if (message.content.startsWith(prefix + 'sleeping')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
 					let suffix = message.content.split(" ").slice(1).join(" ");
-					bot.user.setGame(suffix+ ' Is Sleeping DM him if needed | Do '+prefix+'help for More!','https://twitch.tv/'+suffix)
+					bot.user.setGame(suffix+ ' Is Sleeping DM him if needed | Do '+prefix+'help for More!','https://twitch.tv/'+twitchusername)
 					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Sleeping")
             } else {
                 message.channel.sendMessage('Only Owners and admins can set Streaming!');
@@ -317,7 +318,7 @@ bot.on("message", function(message) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
 					let suffix = message.content.split(" ").slice(1).join(" ")
 					var user = message.author.username;
-					bot.user.setGame(suffix ,'https://twitch.tv/'+user)
+					bot.user.setGame(suffix ,'https://twitch.tv/'+twitchusername)
 					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Status")
             } else {
                 message.channel.sendMessage('Only Owners and admins can set Status!');
@@ -386,7 +387,7 @@ bot.on("message", function(message) {
             queue.splice(i, 1);
 	    }
             chan.leave()
-	    bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/chisdealhd')
+	    bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername)
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
 
@@ -1157,7 +1158,7 @@ bot.on('ready', function() {
 	setInterval(() => {
         fs.readFile('./status.txt', 'utf8', function(err, data) {
         var games = data.toString().split('\n')
-        bot.user.setGame(games[Math.floor(Math.random()* games.length)]+ ' Bot Prefix ' +prefix+' '+bot.guilds.size+' Connected Servers','https://twitch.tv/chisdealhd', function(err) {
+        bot.user.setGame(games[Math.floor(Math.random()* games.length)]+ ' | Bot Prefix ' +prefix+' | '+bot.guilds.size+' Connected Servers','https://twitch.tv/'+twitchusername, function(err) {
         console.log(games)
             if (err) {
                 message.channel.sendMessage("ERROR has be MADE!" + err);
