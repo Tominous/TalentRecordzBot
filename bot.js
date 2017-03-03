@@ -1,7 +1,7 @@
 /*
  * Chis's Music Bot
  * Developed by ChisdealHD & Bacon_Space
- * Visit https://discord.gg/QWuVhAD for more information.
+ * Visit https://discord.gg/EX642f8 for more information.
  */
 var errorlog = require("./data/errors.json")
 
