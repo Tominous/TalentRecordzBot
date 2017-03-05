@@ -105,12 +105,7 @@ function play(msg, queue, song) {
                 song = (song.includes("https://" || "http://")) ? song : results[0].link
                 let stream = ytdl(song, {
                     audioonly: true
-                })
-
-                stream.on('error', function(error) {
-                    return msg.channel.sendMessage("Could not play video, or Video is Private. Please try another URL or SONGNAME!");
-                })
-                
+                })                
                 let test
                 if (queue.length === 0) test = true
                 queue.push({
