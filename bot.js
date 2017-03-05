@@ -105,7 +105,10 @@ function play(msg, queue, song) {
                 song = (song.includes("https://" || "http://")) ? song : results[0].link
                 let stream = ytdl(song, {
                     audioonly: true
-                })                
+                })
+                stream.on('error', function(error) {
+                    return msg.channel.sendMessage("Could not play video, or Video is Private. Please try another URL or SONGNAME!");
+                })
                 let test
                 if (queue.length === 0) test = true
                 queue.push({
@@ -377,6 +380,7 @@ bot.on("message", function(message) {
             var chan = message.member.voiceChannel
 	    let player = message.guild.voiceConnection.player.dispatcher
 	    let queue = getQueue(message.guild.id);
+	    player.pause()
 	    for (var i = queue.length - 1; i >= 0; i--) {
             queue.splice(i, 1);
 	    }
