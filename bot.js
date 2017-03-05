@@ -377,7 +377,6 @@ bot.on("message", function(message) {
             var chan = message.member.voiceChannel
 	    let player = message.guild.voiceConnection.player.dispatcher
 	    let queue = getQueue(message.guild.id);
-            player.pause()
 	    for (var i = queue.length - 1; i >= 0; i--) {
             queue.splice(i, 1);
 	    }
