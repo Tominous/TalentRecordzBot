@@ -886,7 +886,7 @@ bot.on("message", function(message) {
 	
 	if (message.content.startsWith(prefix + 'beam')) {
 	  var suffix1 = message.content.split(" ").slice(1).join(" ");
-	  if(suffix1 === "" || suffix1 == null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
+	  if(suffix1 == "" || suffix1 === null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
     request("https://beam.pro/api/v1/channels/"+suffix1,
     function(err,res,body){
               var data1 = JSON.parse(body);
@@ -985,7 +985,7 @@ bot.on("message", function(message) {
 	
 	if (message.content.startsWith(prefix + 'MCserverchecker')) {
 	  var suffix = message.content.split(" ").slice(1).join(" ");
-	   if(suffix === "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "MCserverchecker <IP:PORT> for Checking Server is Online for Minecraft!");
+	   if(suffix == "" || suffix === null) return message.channel.sendMessage("Do " + prefix + "MCserverchecker <IP:PORT> for Checking Server is Online for Minecraft!");
     request("https://eu.mc-api.net/v3/server/info/"+suffix+"/json",
     function(err,res,body){
               var data = JSON.parse(body);
@@ -1021,7 +1021,7 @@ bot.on("message", function(message) {
     }
 	if (message.content.startsWith(prefix1 + "8ball")) {
 		var suffix = message.content.split(" ").slice(1).join(" ");
-      if(suffix === "" || suffix == null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
+      if(suffix == "" || suffix === null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
 		var mes = ["It is certain", "It is decidedly so" , "Without a doubt" , "Yes, definitely" , "You may rely on it" , "As I see it, yes" , "Most likely" , "Outlook good" , "Yes" , "Signs point to yes" , "Reply hazy try again" , "Ask again later" , "Better not tell you now" , "Cannot predict now" , "Concentrate and ask again" , "Don't count on it" , "My reply is no" , "The stars say no" , "Outlook not so good" , "Very doubtful"];
 		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
 	}
@@ -1042,7 +1042,7 @@ bot.on("message", function(message) {
 	}
 	if(message.content.startsWith(prefix + "twitch")) {
       var suffix = message.content.split(" ").slice(1).join(" ");
-      if(suffix === "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "twitch <username?> for Online Status!");
+      if(suffix == "" || suffix === null) return message.channel.sendMessage("Do " + prefix + "twitch <username?> for Online Status!");
       request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id="+twitchkey,
 			function(err,res,body){
 				if(err) {
@@ -1075,7 +1075,7 @@ bot.on("message", function(message) {
                                 if(sub.pageInfo.resultsPerPage != 0){
                                     message.channel.sendMessage("YouTube SUBSCRIBERS: **" + sub.items[0].statistics.subscriberCount + "**");
                                 }else message.channel.sendMessage("Nothing found");
-                            })
+                            });
                         break;
                         }
                     }
@@ -1083,12 +1083,12 @@ bot.on("message", function(message) {
             }catch(e){
                 message.channel.sendMessage(e);
             }
-        })
+        });
     }
 
         if (message.content.startsWith(prefix + 'np') || message.content.startsWith(prefix + 'nowplaying')) {
             let queue = getQueue(message.guild.id);
-            if (queue.length == 0) return message.channel.sendMessage("No music in queue");
+            if (queue.length === 0) return message.channel.sendMessage("No music in queue");
             message.channel.sendMessage(`${rb}xl\nCurrently playing: ${queue[0].title} | by ${queue[0].requested}${rb}`);
         }
 		if (message.content === prefix + 'specs') {
@@ -1135,26 +1135,26 @@ bot.on("message", function(message) {
   }
         if (message.content.startsWith(prefix + 'queue')) {
             let queue = getQueue(message.guild.id);
-            if (queue.length == 0) return message.channel.sendMessage("No music in queue");
+            if (queue.length === 0) return message.channel.sendMessage("No music in queue");
             let text = '';
             for (let i = 0; i < queue.length; i++) {
-                text += `${(i + 1)}. ${queue[i].title} | requested by ${queue[i].requested}\n`
-            };
+                text += `${(i + 1)}. ${queue[i].title} | requested by ${queue[i].requested}\n`;
+            }
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
         }
-    } catch (err) {
+    } catch (err); {
         console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack);
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
             "stack": err.stack
-        }
+        };
         fs.writeFile("./data/errors.json", JSON.stringify(errorlog), function(err) {
             if (err) return console.log("Even worse we couldn't write to our error log file! Make sure data/errors.json still exists!");
-        })
+        });
 
     }
-})
+});
 
 bot.on('ready', function() {
 	setInterval(() => {
