@@ -387,7 +387,7 @@ bot.on("message", function(message) {
 	    	player.pause();
 	    	for (var i = queue.length - 1; i >= 0; i--) {
             	queue.splice(i, 1);
-	    	};
+	    	}
             	chan.leave();
 	    	bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername);
             	message.channel.sendMessage(':wave: : no music then :( well im all alone!');
@@ -429,7 +429,7 @@ bot.on("message", function(message) {
             fs.writeFile('./data/notes.json', JSON.stringify(notes), function(err) {
                 if (err) return;
                 message.channel.sendMessage('Added to notes! Type `' + prefix + 'mynotes` to see all your notes');
-            })
+            });
         }
         if (message.content === prefix + 'mynotes') {
             var nutes = 'Here are your notes:\n\n```';
@@ -464,7 +464,7 @@ bot.on("message", function(message) {
         if (message.content.startsWith(prefix + "clear")) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1 || message.channel.permissionsFor(message.member).hasPermission('MANAGE_SERVER')) {
                 let queue = getQueue(message.guild.id);
-                if (queue.length == 0) return message.channel.sendMessage(`No music in queue`);
+                if (queue.length === 0) return message.channel.sendMessage(`No music in queue`);
                 for (var i = queue.length - 1; i >= 0; i--) {
                     queue.splice(i, 1);
                 }
@@ -499,7 +499,7 @@ bot.on("message", function(message) {
         if (message.content.startsWith(prefix + 'skip')) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1 || message.channel.permissionsFor(message.member).hasPermission('MANAGE_SERVER')) {
                 let player = message.guild.voiceConnection.player.dispatcher;
-                if (!player || player.paused) return message.channel.sendMessage("Bot is not playing!")
+                if (!player || player.paused) return message.channel.sendMessage("Bot is not playing!");
                 message.channel.sendMessage('Skipping song...');
                 player.end();
             } else {
@@ -523,16 +523,16 @@ bot.on("message", function(message) {
                 if (!found) return message.channel.sendMessage('Nothing found for this user');
                 message.channel.sendMessage(`Delete the case of ${warns[found].user.name}\nReason: ${warns[found].reason}`);
                 delete warns[found];
-                fs.writeFile("./data/warns.json", JSON.stringify(warns))
+                fs.writeFile("./data/warns.json", JSON.stringify(warns));
             } else {
-                message.channel.sendMessage("You have to be able to kick/ban members to use this command")
+                message.channel.sendMessage("You have to be able to kick/ban members to use this command");
             }
         }
 
         if (message.content.startsWith(prefix + 'pause')) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
                 let player = message.guild.voiceConnection.player.dispatcher
-                if (!player || player.paused) return message.channel.sendMessage("Bot is not playing")
+                if (!player || player.paused) return message.channel.sendMessage("Bot is not playing");
                 player.pause();
                 message.channel.sendMessage("Pausing music...");
             } else {
@@ -542,14 +542,14 @@ bot.on("message", function(message) {
 
         if (message.content.startsWith(prefix + 'reminder')) {
             try {
-                let c = message.content.substring(message.content.indexOf(' ') + 1, message.content.length)
-                let msg = c.split(" ").splice(1).join(" ").split("|")
-                msg[0] = msg[0].replace(/\s/g, '')
-                let time = parseTime(msg[0])
-                let reminder = msg[1].trim()
-                message.reply("I will PM you a reminder to " + reminder + " in " + time + "!")
+                let c = message.content.substring(message.content.indexOf(' ') + 1, message.content.length);
+                let msg = c.split(" ").splice(1).join(" ").split("|");
+                msg[0] = msg[0].replace(/\s/g, '');
+                let time = parseTime(msg[0]);
+                let reminder = msg[1].trim();
+                message.reply("I will PM you a reminder to " + reminder + " in " + time + "!");
                 setTimeout(function() {
-                    message.channel.sendMessage(message.author + " Reminder: " + reminder)
+                    message.channel.sendMessage(message.author + " Reminder: " + reminder);
                 }, time.countdown)
 
                 function parseTime(str) {
@@ -567,7 +567,7 @@ bot.on("message", function(message) {
                         }
                     }
                     if (!num || isNaN(num) || num < 1 || !time || ["d", "day", "days", "h", "hr", "hrs", "hour", "hours", "m", "min", "mins", "minute", "minutes", "s", "sec", "secs", "second", "seconds"].indexOf(time) == -1) {
-                        return
+                        return;
                     }
                     let countdown = 0
                     switch (time) {
@@ -605,39 +605,39 @@ bot.on("message", function(message) {
                     }
                 }
             } catch (err) {
-                message.channel.sendMessage("Invalid arguments.")
+                message.channel.sendMessage("Invalid arguments.");
             }
         }
 
         if (message.content.startsWith(prefix + 'shutdown')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                message.channel.sendMessage("**Shutdown has been initiated**.\nShutting down...")
+                message.channel.sendMessage("**Shutdown has been initiated**.\nShutting down...");
                 setTimeout(function() {
-                    bot.destroy()
+                    bot.destroy();
                 }, 1000)
                 setTimeout(function() {
-                    process.exit()
+                    process.exit();
                 }, 2000)
             }
         }
 
         if (message.content.startsWith(prefix + 'warn')) {
             if (message.channel.permissionsFor(message.author).hasPermission("KICK_MEMBERS") || message.channel.permissionsFor(message.author).hasPermission("BAN_MEMBERS")) {
-                let c = message.content
-                let usr = message.mentions.users.array()[0]
+                let c = message.content;
+                let usr = message.mentions.users.array()[0];
                 if (!usr) return message.channel.sendMessage("You need to mention the user");
-                let rsn = c.split(" ").splice(1).join(" ").replace(usr, "").replace("<@!" + usr.id + ">", "")
-                let caseid = genToken(20)
+                let rsn = c.split(" ").splice(1).join(" ").replace(usr, "").replace("<@!" + usr.id + ">", "");
+                let caseid = genToken(20);
 
                 function genToken(length) {
-                    let key = ""
-                    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                    let key = "";
+                    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
                     for (let i = 0; i < length; i++) {
-                        key += possible.charAt(Math.floor(Math.random() * possible.length))
+                        key += possible.charAt(Math.floor(Math.random() * possible.length));
                     }
 
-                    return key
+                    return key;
                 }
 
                 warns[caseid] = {
@@ -659,43 +659,43 @@ bot.on("message", function(message) {
                     },
                     "reason": rsn
                 }
-                message.channel.sendMessage(usr + " was warned for `" + rsn + "`, check logs for more info")
-                fs.writeFile("./data/warns.json", JSON.stringify(warns))
+                message.channel.sendMessage(usr + " was warned for `" + rsn + "`, check logs for more info");
+                fs.writeFile("./data/warns.json", JSON.stringify(warns));
             } else {
-                message.channel.sendMessage("You have to be able to kick/ban members to use this command!")
+                message.channel.sendMessage("You have to be able to kick/ban members to use this command!");
             }
         }
 
         if (message.content.startsWith(prefix + 'say')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                var say = message.content.split(" ").splice(1).join(" ")
+                var say = message.content.split(" ").splice(1).join(" ");
                 message.delete();
-                message.channel.sendMessage(say)
+                message.channel.sendMessage(say);
             }
         }
 
         if (message.content.startsWith(prefix + 'eval')) {
             if (isCommander(message.author.id)) {
                 try {
-                    let code = message.content.split(" ").splice(1).join(" ")
-                    let result = eval(code)
-                    message.channel.sendMessage("```diff\n+ " + result + "```")
+                    let code = message.content.split(" ").splice(1).join(" ");
+                    let result = eval(code);
+                    message.channel.sendMessage("```diff\n+ " + result + "```");
                 } catch (err) {
-                    message.channel.sendMessage("```diff\n- " + err + "```")
+                    message.channel.sendMessage("```diff\n- " + err + "```");
                 }
             } else {
-                message.channel.sendMessage("Sorry, you do not have permissisons to use this command, **" + message.author.username + "**.")
+                message.channel.sendMessage("Sorry, you do not have permissisons to use this command, **" + message.author.username + "**.");
             }
         }
 
         if (message.content.startsWith(prefix + 'volume')) {
             let suffix = message.content.split(" ")[1];
-            var player = message.guild.voiceConnection.player.dispatcher
+            var player = message.guild.voiceConnection.player.dispatcher;
             if (!player || player.paused) return message.channel.sendMessage('No music m8, queue something with `' + prefix + 'play`');
             if (!suffix) {
                 message.channel.sendMessage(`The current volume is ${(player.volume * 100)}`);
             } else if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                let volumeBefore = player.volume
+                let volumeBefore = player.volume;
                 let volume = parseInt(suffix);
                 if (volume > 100) return message.channel.sendMessage("The music can't be higher then 100");
                 player.setVolume((volume / 100));
@@ -707,7 +707,7 @@ bot.on("message", function(message) {
 
         if (message.content.startsWith(prefix + 'resume')) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                let player = message.guild.voiceConnection.player.dispatcher
+                let player = message.guild.voiceConnection.player.dispatcher;
                 if (!player) return message.channel.sendMessage('No music is playing at this time.');
                 if (player.playing) return message.channel.sendMessage('The music is already playing');
                 var queue = getQueue(message.guild.id);
@@ -720,171 +720,170 @@ bot.on("message", function(message) {
         }
 
         if (message.content.startsWith(prefix + 'invite')) {
-            message.channel.sendMessage("My OAuth URL: " + `http://discordapp.com/oauth2/authorize?client_id=${config.client_id}&scope=bot`)
+            message.channel.sendMessage("My OAuth URL: " + `http://discordapp.com/oauth2/authorize?client_id=${config.client_id}&scope=bot`);
         }
         if (message.content.startsWith(prefix + 'git')) {
-            message.channel.sendMessage("GitHub URL: **https://github.com/ChisdealHD/TalentRecordzBot**")
+            message.channel.sendMessage("GitHub URL: **https://github.com/ChisdealHD/TalentRecordzBot**");
         }
 		
 	if (message.content === ":kappa") {
-        message.channel.sendFile("./images/emotes/kappa.png")
+        message.channel.sendFile("./images/emotes/kappa.png");
     }
 	if (message.content === ":beam") {
-        message.channel.sendFile("./images/emotes/beam.png")
+        message.channel.sendFile("./images/emotes/beam.png");
     }
 	if (message.content === ":cactus") {
-        message.channel.sendFile("./images/emotes/cactus.png")
+        message.channel.sendFile("./images/emotes/cactus.png");
     }
 	if (message.content === ":cat") {
-        message.channel.sendFile("./images/emotes/cat.png")
+        message.channel.sendFile("./images/emotes/cat.png");
     }
 	if (message.content === ":chicken") {
-        message.channel.sendFile("./images/emotes/chicken.png")
+        message.channel.sendFile("./images/emotes/chicken.png");
     }
 	if (message.content === ":dog") {
-        message.channel.sendFile("./images/emotes/dog.png")
+        message.channel.sendFile("./images/emotes/dog.png");
     }
 	if (message.content === ":facepalm") {
-        message.channel.sendFile("./images/emotes/facepalm.png")
+        message.channel.sendFile("./images/emotes/facepalm.png");
     }
 	if (message.content === ":fish") {
-        message.channel.sendFile("./images/emotes/fish.png")
+        message.channel.sendFile("./images/emotes/fish.png");
     }
 	if (message.content === ":mappa") {
-        message.channel.sendFile("./images/emotes/mappa.png")
+        message.channel.sendFile("./images/emotes/mappa.png");
     }
 	if (message.content === ":salute") {
-       message.channel.sendFile("./images/emotes/salute.png")
+       message.channel.sendFile("./images/emotes/salute.png");
     }
 	if (message.content === ":sloth") {
-        message.channel.sendFile("./images/emotes/sloth.png")
+        message.channel.sendFile("./images/emotes/sloth.png");
     }
 	if (message.content === ":swag") {
-        message.channel.sendFile("./images/emotes/swag.png")
+        message.channel.sendFile("./images/emotes/swag.png");
     }
 	if (message.content === ":termital") {
-        message.channel.sendFile("./images/emotes/termital.png")
+        message.channel.sendFile("./images/emotes/termital.png");
     }
 	if (message.content === ":whoappa") {
-        message.channel.sendFile("./images/emotes/whoappa.png")
+        message.channel.sendFile("./images/emotes/whoappa.png");
     }
 	if (message.content === ":yolo") {
-        message.channel.sendFile("./images/emotes/yolo.png")
+        message.channel.sendFile("./images/emotes/yolo.png");
     }
 	if (message.content === ":heyguys") {
-        message.channel.sendFile("./images/emotes/heyguys.png")
+        message.channel.sendFile("./images/emotes/heyguys.png");
     }
 	if (message.content === ":doorstop") {
-        message.channel.sendFile("./images/emotes/doorstop.png")
+        message.channel.sendFile("./images/emotes/doorstop.png");
     }
 	if (message.content === ":elegiggle") {
-        message.channel.sendFile("./images/emotes/elegiggle.png")
+        message.channel.sendFile("./images/emotes/elegiggle.png");
     }
 	if (message.content === ":failfish") {
-        message.channel.sendFile("./images/emotes/failfish.png")
+        message.channel.sendFile("./images/emotes/failfish.png");
     }
 	if (message.content === ":feelsbadman") {
-        message.channel.sendFile("./images/emotes/feelsbadman.png")
+        message.channel.sendFile("./images/emotes/feelsbadman.png");
     }
 	if (message.content === ":kappaclaus") {
-        message.channel.sendFile("./images/emotes/kappaclaus.png")
+        message.channel.sendFile("./images/emotes/kappaclaus.png");
     }
 	if (message.content === ":kappapride") {
-        message.channel.sendFile("./images/emotes/kappapride.png")
+        message.channel.sendFile("./images/emotes/kappapride.png");
     }
 	if (message.content === ":kappaross") {
-       message.channel.sendFile("./images/emotes/kappaross.png")
+       message.channel.sendFile("./images/emotes/kappaross.png");
     }
 	if (message.content === ":kappawealth") {
-        message.channel.sendFile("./images/emotes/kappawealth.png")
+        message.channel.sendFile("./images/emotes/kappawealth.png");
     }
 	if (message.content === ":minglee") {
-        message.channel.sendFile("./images/emotes/minglee.png")
+        message.channel.sendFile("./images/emotes/minglee.png");
     }
 	if (message.content === ":nootnoot") {
-        message.channel.sendFile("./images/emotes/nootnoot.png")
+        message.channel.sendFile("./images/emotes/nootnoot.png");
     }
 	if (message.content === ":seemsgood") {
-        message.channel.sendFile("./images/emotes/seemsgood.png")
+        message.channel.sendFile("./images/emotes/seemsgood.png");
     }
 	if (message.content === ":swiftrage") {
-        message.channel.sendFile("./images/emotes/swiftrage.png")
+        message.channel.sendFile("./images/emotes/swiftrage.png");
     }
 	if (message.content === ":wutface") {
-        message.channel.sendFile("./images/emotes/wutface.png")
+        message.channel.sendFile("./images/emotes/wutface.png");
     }
 	if (message.content === ":getgranted") {
-        message.channel.sendFile("./images/emotes/getgranted.png")
+        message.channel.sendFile("./images/emotes/getgranted.png");
     }
 	if (message.content === ":adults") {
-        message.channel.sendFile("./images/emotes/adults.png")
+        message.channel.sendFile("./images/emotes/adults.png");
     }
 	if (message.content === ":android") {
-        message.channel.sendFile("./images/emotes/android.png")
+        message.channel.sendFile("./images/emotes/android.png");
     }
 	if (message.content === ":anonymous") {
-        message.channel.sendFile("./images/emotes/anonymous.png")
+        message.channel.sendFile("./images/emotes/anonymous.png");
     }
 	if (message.content === ":deathstar") {
-        message.channel.sendFile("./images/emotes/deathstar.png")
+        message.channel.sendFile("./images/emotes/deathstar.png");
     }
 	if (message.content === ":feelsgoodman") {
-        message.channel.sendFile("./images/emotes/feelsgoodman.png")
+        message.channel.sendFile("./images/emotes/feelsgoodman.png");
     }
         if (message.content === ":thecreedsclan") {
-        message.channel.sendFile("./images/emotes/LOGO.png")
+        message.channel.sendFile("./images/emotes/LOGO.png");
     }
         if (message.content === ":ampenergycherry") {
-        message.channel.sendFile("./images/emotes/AMPEnergyCherry.png")
+        message.channel.sendFile("./images/emotes/AMPEnergyCherry.png");
     }
     	if (message.content === ":argieb8") {
-        message.channel.sendFile("./images/emotes/ArgieB8.png")
+        message.channel.sendFile("./images/emotes/ArgieB8.png");
     }
     	if (message.content === ":biblethump") {
-        message.channel.sendFile("./images/emotes/biblethump.png")
+        message.channel.sendFile("./images/emotes/biblethump.png");
     }
     	if (message.content === ":biersderp") {
-        message.channel.sendFile("./images/emotes/biersderp.png")
+        message.channel.sendFile("./images/emotes/biersderp.png");
     }
     	if (message.content === ":kapow") {
-        message.channel.sendFile("./images/emotes/kapow.png")
+        message.channel.sendFile("./images/emotes/kapow.png");
     }
     	if (message.content === ":lirik") {
-        message.channel.sendFile("./images/emotes/lirik.png")
+        message.channel.sendFile("./images/emotes/lirik.png");
     }
     	if (message.content === ":mau5") {
-        message.channel.sendFile("./images/emotes/Mau5.png")
+        message.channel.sendFile("./images/emotes/Mau5.png");
     }
     	if (message.content === ":mcat") {
-        message.channel.sendFile("./images/emotes/mcaT.png")
+        message.channel.sendFile("./images/emotes/mcaT.png");
     }
     	if (message.content === ":pjsalt") {
-        message.channel.sendFile("./images/emotes/PJSalt.png")
+        message.channel.sendFile("./images/emotes/PJSalt.png");
     }
     	if (message.content === ":pjsugar") {
-        message.channel.sendFile("./images/emotes/PJSugar.png")
+        message.channel.sendFile("./images/emotes/PJSugar.png");
     }
     	if (message.content === ":twitchRaid") {
-        message.channel.sendFile("./images/emotes/twitchraid.png")
+        message.channel.sendFile("./images/emotes/twitchraid.png");
     }
 	if (message.content === ":gaben") {
-        message.channel.sendFile("./images/emotes/gaben.png")
+        message.channel.sendFile("./images/emotes/gaben.png");
     }
 	if (message.content === ":twitch") {
-        message.channel.sendFile("./images/emotes/twitch.png")
+        message.channel.sendFile("./images/emotes/twitch.png");
     }
     	if (message.content === ":Illuminati") {
-        message.channel.sendFile("./images/emotes/Illuminati.png")
+        message.channel.sendFile("./images/emotes/Illuminati.png");
     }
 	if (message.content === ":dableft") {
-        message.channel.sendFile("./images/emotes/dableft.png")
+        message.channel.sendFile("./images/emotes/dableft.png");
     }
 	if (message.content === ":dabright") {
-        message.channel.sendFile("./images/emotes/dabright.png")
+        message.channel.sendFile("./images/emotes/dabright.png");
     }
     	if (message.content === prefix + "donate"){
-        message.channel.sendMessage("Donate  HERE! show some LOVE <3 https://streamjar.tv/tip/chisdealhd")
-    }
+        message.channel.sendMessage("Donate  HERE! show some LOVE <3 https://streamjar.tv/tip/chisdealhd");
 	
 	if (message.content.startsWith(prefix + 'beam')) {
 	  var suffix1 = message.content.split(" ").slice(1).join(" ");
@@ -998,17 +997,17 @@ bot.on("message", function(message) {
                       +"\n Online Players: "+data.players.online
 					  +"\n Max Players: "+data.players.max
 					  +"\n Online: "+data.online
-					  +"\n Version: "+data.version.name)
+					  +"\n Version: "+data.version.name);
               }else{
-                message.channel.sendMessage(suffix+" is offline")
+                message.channel.sendMessage(suffix+" is offline");
             }
         });
     }
 	if (message.content.startsWith(prefix + "dance")) {
         fs.readFile('./dance.txt', 'utf8', function(err, data) {
-        var updates = data.toString().split('\n')
+        var updates = data.toString().split('\n');
         message.channel.sendMessage(updates);
-            console.log(updates)
+            console.log(updates);
             if (err) {
                 message.channel.sendMessage("This Command Doesnt WORK!, Please try AGAIN!");
             }
@@ -1016,7 +1015,7 @@ bot.on("message", function(message) {
         });
     }
 	if (message.content.startsWith(prefix + "google")) {
-    var searchQuery = encodeURI(message.content.substring(8))
+    var searchQuery = encodeURI(message.content.substring(8));
     var url = "https://www.google.com/search?q=" + searchQuery;
     message.channel.sendMessage(url + "\n Here Is Your Search!");
     }
@@ -1024,22 +1023,22 @@ bot.on("message", function(message) {
 		var suffix = message.content.split(" ").slice(1).join(" ");
       if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
 		var mes = ["It is certain", "It is decidedly so" , "Without a doubt" , "Yes, definitely" , "You may rely on it" , "As I see it, yes" , "Most likely" , "Outlook good" , "Yes" , "Signs point to yes" , "Reply hazy try again" , "Ask again later" , "Better not tell you now" , "Cannot predict now" , "Concentrate and ask again" , "Don't count on it" , "My reply is no" , "The stars say no" , "Outlook not so good" , "Very doubtful"];
-		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)])
+		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
 	}
 	if (message.content.startsWith(prefix1 + "beam me up")) {
 		var mes = ["Aye, aye, Captain.", "Sorry, captain. i need more power!", "Right away, captain."];
-		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)])
+		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
 	}
 	if (message.content.startsWith(prefix1 + "whats my name")) {
 		var user = message.author.username;
-        message.channel.sendMessage("Your name is: " + user)
+        message.channel.sendMessage("Your name is: " + user);
     }
 	if (message.content.startsWith(prefix1 + "halo4")) {
-		message.channel.sendMessage(" Mayday, mayday. This is UNSC FFG-201 Forward Unto Dawn, requesting immediate evac. Survivors aboard.")
+		message.channel.sendMessage(" Mayday, mayday. This is UNSC FFG-201 Forward Unto Dawn, requesting immediate evac. Survivors aboard.");
 	}
 	if (message.content.startsWith(prefix1 + "tell me a joke")) {
 		var mes = ["What did the mother bee say to the little bee, ```You bee good and beehive yourself.```", "i used to have a fear of hurdles, ```but eventually i got over it```", "Police officer to a driver: “OK, driver’s license, vehicle license, first aid kit and warning triangle. ```Driver: Nah, I’ve already got all that. But how much for that funny Captain’s cap?```", "A German, an American and a Russian walk into a bar.```The bartender looks at them suspiciously and says, “Is this some kind of a joke?```"];
-		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)])
+		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
 	}
 	if(message.content.startsWith(prefix + "twitch")) {
       var suffix = message.content.split(" ").slice(1).join(" ");
@@ -1144,7 +1143,7 @@ bot.on("message", function(message) {
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack);
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -1160,7 +1159,7 @@ bot.on("message", function(message) {
 bot.on('ready', function() {
 	setInterval(() => {
         fs.readFile('./status.txt', 'utf8', function(err, data) {
-        var games = data.toString().split('\n')
+        var games = data.toString().split('\n');
         bot.user.setGame(games[Math.floor(Math.random()* games.length)]+ ' | Bot Prefix ' +prefix+' | '+bot.guilds.size+' Connected Servers','https://twitch.tv/'+twitchusername, function(err) {
         console.log(games)
             if (err) {
