@@ -226,7 +226,7 @@ LET'S GO!
 ------------------------------------------------------`;
 
         console.log(msg);
-        var errsize = Number(fs.statSync("./data/errors.json")["size"]);
+        var errsize = Number(fs.statSync("./data/errors.json").size);
         console.log("Current error log size is " + errsize + " Bytes");
         if (errsize > 5000) {
             errorlog = {};
@@ -267,16 +267,15 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
             if (svr[i].voiceConnection.channel.members.size === 1 && !svr[i].voiceConnection.player.dispatcher.paused) {
                 //svr[i].defaultChannel.sendMessage("I paused my music in the voice channel because no one is there, rejoin the channel to resume music")
                 svr[i].voiceConnection.player.dispatcher.pause();
-                var game = bot.user.presence.game.name;
+                var game11 = bot.user.presence.game.name;
                 paused[svr[i].voiceConnection.channel.id] = {
                     "player": svr[i].voiceConnection.player.dispatcher
                 };
-                bot.user.setGame("⏸ " + game,'https://twitch.tv/'+twitchusername);
+                bot.user.setGame("⏸ " + game11,'https://twitch.tv/'+twitchusername);
             }
         }
     }
 });
-
 bot.on("message", function(message) {
     try {
         if (message.author.bot) return;
@@ -381,14 +380,14 @@ bot.on("message", function(message) {
 		if(!message.guild.voiceConnection)
                  	  console.error("No voice connection");
 		else {
-            	var chan = message.member.voiceChannel;
+            	var chan11 = message.member.voiceChannel;
 	    	let player = message.guild.voiceConnection.player.dispatche;
 	    	let queue = getQueue(message.guild.id);
 	    	player.pause();
 	    	for (var i = queue.length - 1; i >= 0; i--) {
             	queue.splice(i, 1);
 	    	}
-            	chan.leave();
+            	chan11.leave();
 	    	bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername);
             	message.channel.sendMessage(':wave: : no music then :( well im all alone!');
 		}
@@ -433,8 +432,8 @@ bot.on("message", function(message) {
         }
         if (message.content === prefix + 'mynotes') {
             var nutes = 'Here are your notes:\n\n```';
-            for (var i = 0; i < notes[message.author.id].notes.length; i++) {
-                nutes += `${i + 1}) '${notes[message.author.id].notes[i].content}' - Added ${notes[message.author.id].notes[i].time}\n`;
+            for (var i11 = 0; i < notes[message.author.id].notes.length; i++) {
+                nutes += `${i11 + 1}) '${notes[message.author.id].notes[i].content}' - Added ${notes[message.author.id].notes[i].time}\n`;
             }
 
             nutes += "```";
@@ -465,8 +464,8 @@ bot.on("message", function(message) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1 || message.channel.permissionsFor(message.member).hasPermission('MANAGE_SERVER')) {
                 let queue = getQueue(message.guild.id);
                 if (queue.length === 0) return message.channel.sendMessage(`No music in queue`);
-                for (var i = queue.length - 1; i >= 0; i--) {
-                    queue.splice(i, 1);
+                for (var i111 = queue.length - 1; i >= 0; i--) {
+                    queue.splice(i111, 1);
                 }
                 message.channel.sendMessage(`Cleared the queue`);
             } else {
@@ -886,7 +885,7 @@ bot.on("message", function(message) {
 	
 	if (message.content.startsWith(prefix + 'beam')) {
 	  var suffix1 = message.content.split(" ").slice(1).join(" ");
-	  if(suffix1 == "" || suffix1 === null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
+	  if(suffix1 === "" || suffix1 === null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
     request("https://beam.pro/api/v1/channels/"+suffix1,
     function(err,res,body){
               var data1 = JSON.parse(body);
@@ -985,7 +984,7 @@ bot.on("message", function(message) {
 	
 	if (message.content.startsWith(prefix + 'MCserverchecker')) {
 	  var suffix = message.content.split(" ").slice(1).join(" ");
-	   if(suffix == "" || suffix === null) return message.channel.sendMessage("Do " + prefix + "MCserverchecker <IP:PORT> for Checking Server is Online for Minecraft!");
+	   if(suffix === "" || suffix === null) return message.channel.sendMessage("Do " + prefix + "MCserverchecker <IP:PORT> for Checking Server is Online for Minecraft!");
     request("https://eu.mc-api.net/v3/server/info/"+suffix+"/json",
     function(err,res,body){
               var data = JSON.parse(body);
@@ -997,7 +996,6 @@ bot.on("message", function(message) {
 			+ "\n Max Players: "+data.players.max
 			+ "\n Online: "+data.online
 			+ "\n Version: "+data.version.name);
-		      break;
               }else{
                 message.channel.sendMessage(suffix+" is offline");
             }
@@ -1020,14 +1018,14 @@ bot.on("message", function(message) {
     message.channel.sendMessage(url + "\n Here Is Your Search!");
     }
 	if (message.content.startsWith(prefix1 + "8ball")) {
-		var suffix = message.content.split(" ").slice(1).join(" ");
-      if(suffix == "" || suffix === null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
+		var suffix4 = message.content.split(" ").slice(1).join(" ");
+      if(suffix4 === "" || suffix4 === null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
 		var mes = ["It is certain", "It is decidedly so" , "Without a doubt" , "Yes, definitely" , "You may rely on it" , "As I see it, yes" , "Most likely" , "Outlook good" , "Yes" , "Signs point to yes" , "Reply hazy try again" , "Ask again later" , "Better not tell you now" , "Cannot predict now" , "Concentrate and ask again" , "Don't count on it" , "My reply is no" , "The stars say no" , "Outlook not so good" , "Very doubtful"];
 		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
 	}
 	if (message.content.startsWith(prefix1 + "beam me up")) {
-		var mes = ["Aye, aye, Captain.", "Sorry, captain. i need more power!", "Right away, captain."];
-		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
+		var mes444 = ["Aye, aye, Captain.", "Sorry, captain. i need more power!", "Right away, captain."];
+		message.channel.sendMessage(mes444[Math.floor(Math.random() * mes.length)]);
 	}
 	if (message.content.startsWith(prefix1 + "whats my name")) {
 		var user = message.author.username;
@@ -1041,8 +1039,8 @@ bot.on("message", function(message) {
 		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
 	}
 	if(message.content.startsWith(prefix + "twitch")) {
-      var suffix = message.content.split(" ").slice(1).join(" ");
-      if(suffix == "" || suffix === null) return message.channel.sendMessage("Do " + prefix + "twitch <username?> for Online Status!");
+      var suffix88 = message.content.split(" ").slice(1).join(" ");
+      if(suffix88 == "" || suffix88 === null) return message.channel.sendMessage("Do " + prefix + "twitch <username?> for Online Status!");
       request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id="+twitchkey,
 			function(err,res,body){
 				if(err) {
@@ -1052,13 +1050,13 @@ bot.on("message", function(message) {
         }
 				var stream = JSON.parse(body);
 				if(stream.stream){
-					message.channel.sendMessage(suffix
+					message.channel.sendMessage(suffix88
 					 +" is online, playing "
 					 +stream.stream.game
 					 +"\n"+stream.stream.channel.status
 					 +"\n"+stream.stream.preview.large);
 				} else {
-					message.channel.sendMessage(suffix+" is offline");
+					message.channel.sendMessage(suffix88+" is offline");
 				}
 			});
     }
@@ -1067,12 +1065,12 @@ bot.on("message", function(message) {
         request("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+id+"&key="+ytkey, function(err, resp, body) {
             try{
                 var parsed = JSON.parse(body);
-                if(parsed.pageInfo.resultsPerPage != 0){
+                if(parsed.pageInfo.resultsPerPage !== 0){
                     for(var i = 0; i < parsed.items.length; i++){
                         if(parsed.items[i].id.channelId) {
                             request("https://www.googleapis.com/youtube/v3/channels?part=statistics&id="+parsed.items[i].id.channelId+"&key="+ytkey, function(err, resp, body) {
                                 var sub = JSON.parse(body);
-                                if(sub.pageInfo.resultsPerPage != 0){
+                                if(sub.pageInfo.resultsPerPage !== 0){
                                     message.channel.sendMessage("YouTube SUBSCRIBERS: **" + sub.items[0].statistics.subscriberCount + "**");
                                 }else message.channel.sendMessage("Nothing found");
                             });
@@ -1142,7 +1140,7 @@ bot.on("message", function(message) {
             }
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
         }
-    } catch (err); {
+    } catch err; {
         console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack);
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
@@ -1154,7 +1152,7 @@ bot.on("message", function(message) {
         });
 
     }
-});
+};
 
 bot.on('ready', function() {
 	setInterval(() => {
@@ -1181,7 +1179,6 @@ app.get('/guilds', function(req, res){ res.send("Talntrecordz is in "+ bot.guild
 app.get('/date', function(req, res){ res.send("Talntrecordz Date is "+ started +""); });
 app.get('/uptime', function(req, res){ res.send("Talntrecordz Has Been Up For "+ started +""); });
 app.get('/specs', function(req, res){ res.send("xl\nSystem info: " + process.platform + "-" + process.arch + " with " + process.release.name + " version " + process.version.slice(1) + "\nProcess info: PID " + process.pid + " at " + process.cwd() + "\nProcess memory usage: " + Math.ceil(process.memoryUsage().heapTotal / 1000000) + " MB\nSystem memory usage: " + Math.ceil((os.totalmem() - os.freemem()) / 1000000) + " of " + Math.ceil(os.totalmem() / 1000000) + " MB\nBot info: ID " + bot.user.id + " #" + bot.user.discriminator + "\n") });
-
 app.listen(process.env.PORT || + serverport);
 // END Roboto SETUP
 
