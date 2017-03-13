@@ -4,10 +4,10 @@
  * Developed by ChisdealHD & Bacon_Space
  * Visit https://discord.gg/EX642f8 for more information.
  */
-var errorlog = require("./data/errors.json")
+var errorlog = require("./data/errors.json");
 
-const Discord = require("discord.js")
-const started = Date()
+const Discord = require("discord.js");
+const started = Date();
 
 try {
     var config = require('./config.json');
@@ -25,35 +25,36 @@ try {
             "youtube_api_key": process.env.YOUTUBE_API_KEY,
 	    "twitch_api_key": config.twitch_api_key,
             "admins": config.admins
-        }
+        };
     } else {
-        console.log("No token passed! Exiting...")
-        process.exit(0)
+        console.log("No token passed! Exiting...");
+        process.exit(0);
     }
 }
 const admins = config.admins;
-const bot = new Discord.Client()
-const notes = require('./data/notes.json')
-const os = require('os')
+const bot = new Discord.Client();
+const notes = require('./data/notes.json');
+const os = require('os');
 const prefix = config.prefix;
 const ytkey = config.youtube_api_key;
 const client_id = config.client_id;
 const twitchkey = config.twitch_api_key;
 const twitchusername = config.twitchusername;
 const serverport = config.server_port;
-const rb = "```"
-const sbl = require("./data/blservers.json")
-const ubl = require("./data/blusers.json")
-const fs = require("fs")
-const warns = require("./data/warns.json")
-const queues = {}
-const ytdl = require('ytdl-core')
-const search = require('youtube-search')
+const rb = "```";
+const sbl = require("./data/blservers.json");
+const ubl = require("./data/blusers.json");
+const fs = require("fs");
+const warns = require("./data/warns.json");
+const queues = {};
+const ytdl = require('ytdl-core');
+const search = require('youtube-search');
 const prefix1 = "hey talent, ";
-const request = require('request')
-const opus = require('opusscript')
-const cheerio = require('cheerio')
-const express = require('express')
+const request = require('request');
+const opus = require('opusscript');
+const cheerio = require('cheerio');
+const 
+  , express = require('express')
   , logger = require('morgan')
   , app = express()
 const markdown = require( "markdown" ).markdown;
