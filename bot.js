@@ -1161,16 +1161,16 @@ bot.on('ready', function() {
         fs.readFile('./status.txt', 'utf8', function(err, data) {
         var games = data.toString().split('\n');
         bot.user.setGame(games[Math.floor(Math.random()* games.length)]+ ' | Bot Prefix ' +prefix+' | '+bot.guilds.size+' Connected Servers','https://twitch.tv/'+twitchusername, function(err) {
-        console.log(games)
+        console.log(games);
             if (err) {
                 message.channel.sendMessage("ERROR has be MADE!" + err);
             }
        });
     });
-}, 120000)
+}, 120000);
 });
 
-bot.login(config.token)
+bot.login(config.token);
 
 // START Roboto SETUP
 app.get('/', function(req, res){ res.send(markdown.toHTML("Running DiscordBot\nNode version: " + process.version + "\nDiscord.js version: " + Discord.version)); });
