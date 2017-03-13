@@ -886,7 +886,7 @@ bot.on("message", function(message) {
 	
 	if (message.content.startsWith(prefix + 'beam')) {
 	  var suffix1 = message.content.split(" ").slice(1).join(" ");
-	  if(suffix1 == "" || suffix1 == null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
+	  if(suffix1 === "" || suffix1 == null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
     request("https://beam.pro/api/v1/channels/"+suffix1,
     function(err,res,body){
               var data1 = JSON.parse(body);
@@ -985,23 +985,19 @@ bot.on("message", function(message) {
 	
 	if (message.content.startsWith(prefix + 'MCserverchecker')) {
 	  var suffix = message.content.split(" ").slice(1).join(" ");
-	   if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "MCserverchecker <IP:PORT> for Checking Server is Online for Minecraft!");
+	   if(suffix === "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "MCserverchecker <IP:PORT> for Checking Server is Online for Minecraft!");
     request("https://eu.mc-api.net/v3/server/info/"+suffix+"/json",
     function(err,res,body){
               var data = JSON.parse(body);
               if(data.online){
                   message.channel.sendMessage(suffix
                		+" is Active "
-			break;
 			+"\n ICON: "+data.favicon
-			break;
               		+"\n Online Players: "+data.players.online
-			break;
 			+ "\n Max Players: "+data.players.max
-			break;
 			+ "\n Online: "+data.online
-			break;
 			+ "\n Version: "+data.version.name);
+		      break;
               }else{
                 message.channel.sendMessage(suffix+" is offline");
             }
@@ -1046,7 +1042,7 @@ bot.on("message", function(message) {
 	}
 	if(message.content.startsWith(prefix + "twitch")) {
       var suffix = message.content.split(" ").slice(1).join(" ");
-      if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "twitch <username?> for Online Status!");
+      if(suffix === "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "twitch <username?> for Online Status!");
       request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id="+twitchkey,
 			function(err,res,body){
 				if(err) {
