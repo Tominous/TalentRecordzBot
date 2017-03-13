@@ -58,7 +58,7 @@ const logger = require('morgan');
 const app = express();
 const markdown = require( "markdown" ).markdown;
 const startTime = Date.now();
-const invite = "My OAuth URL: " + `http://discordapp.com/oauth2/authorize?client_id=${config.client_id}&scope=bot`;
+const invite = "My OAuth URL: " + `https://discordapp.com/oauth2/authorize?permissions=1341643849&scope=bot&client_id=${config.client_id}`;
 var l = require('stringformat');
 const opts = {
     part: 'snippet',
