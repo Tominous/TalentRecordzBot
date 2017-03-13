@@ -1140,7 +1140,7 @@ bot.on("message", function(message) {
             }
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
         }
-    } catch err; {
+    } catch (err) {
         console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack);
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
