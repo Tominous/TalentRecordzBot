@@ -283,23 +283,23 @@ bot.on("message", function(message) {
 		if (message.channel.type === "dm") return;
         if (message.author === bot.user)
             if (message.guild === undefined) {
-                message.channel.sendMessage("The bot only works in servers!")
+                message.channel.sendMessage("The bot only works in servers!");
 
                 return;
             }
         if (sbl.indexOf(message.guild.id) != -1 && message.content.startsWith(prefix)) {
-            message.channel.sendMessage("This server is blacklisted Congratz on Blacklist Unit!")
+            message.channel.sendMessage("This server is blacklisted Congratz on Blacklist Unit!");
             return
         }
         if (ubl.indexOf(message.author.id) != -1 && message.content.startsWith(prefix)) {
-            message.reply(" you are blacklisted and can not use the bot!")
+            message.reply(" you are blacklisted and can not use the bot!");
             return
         }
 	if (message.content.startsWith(prefix + 'setstream')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
 					let suffix = message.content.split(" ").slice(1).join(" ");
-					bot.user.setGame(suffix+ ' Is now LIVE! | Do '+prefix+'help for More!','https://twitch.tv/'+suffix)
-					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Streaming")
+					bot.user.setGame(suffix+ ' Is now LIVE! | Do '+prefix+'help for More!','https://twitch.tv/'+suffix);
+					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Streaming");
             } else {
                 message.channel.sendMessage('Only Owners and admins can set Streaming!');
             }
@@ -307,27 +307,27 @@ bot.on("message", function(message) {
 	if (message.content.startsWith(prefix + 'sleeping')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
 					let suffix = message.content.split(" ").slice(1).join(" ");
-					bot.user.setGame(suffix+ ' Is Sleeping DM him if needed | Do '+prefix+'help for More!','https://twitch.tv/'+twitchusername)
-					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Sleeping")
+					bot.user.setGame(suffix+ ' Is Sleeping DM him if needed | Do '+prefix+'help for More!','https://twitch.tv/'+twitchusername);
+					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Sleeping");
             } else {
                 message.channel.sendMessage('Only Owners and admins can set Streaming!');
             }
         }
 	if (message.content.startsWith(prefix + 'status')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-					let suffix = message.content.split(" ").slice(1).join(" ")
+					let suffix = message.content.split(" ").slice(1).join(" ");
 					var user = message.author.username;
-					bot.user.setGame(suffix ,'https://twitch.tv/'+twitchusername)
-					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Status")
+					bot.user.setGame(suffix ,'https://twitch.tv/'+twitchusername);
+					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Status");
             } else {
                 message.channel.sendMessage('Only Owners and admins can set Status!');
             }
         }
         if (message.content.startsWith(prefix + "ping")) {
-            var before = Date.now()
+            var before = Date.now();
             message.channel.sendMessage("Pong!").then(function(msg) {
-                var after = Date.now()
-                msg.edit("Pong! **" + (after - before) + "**ms")
+                var after = Date.now();
+                msg.edit("Pong! **" + (after - before) + "**ms");
 
             })
         }
@@ -359,22 +359,22 @@ bot.on("message", function(message) {
 }});
   }
         if (message.content.startsWith(prefix + 'servers')) {
-            message.channel.sendMessage("I'm currently on **" + bot.guilds.size + "** server(s)")
+            message.channel.sendMessage("I'm currently on **" + bot.guilds.size + "** server(s)");
         }
         if (message.content === prefix + 'uptime') {
-            message.channel.sendMessage("I have been up for `" + secondsToString(process.uptime()) + "` - My process was started at this time --> `" + started + "`")
+            message.channel.sendMessage("I have been up for `" + secondsToString(process.uptime()) + "` - My process was started at this time --> `" + started + "`");
         }
 
         if (message.content.startsWith(prefix + 'play')) {
             if (!message.guild.voiceConnection) {
-                if (!message.member.voiceChannel) return message.channel.sendMessage('You need to be in a voice channel')
-                var chan = message.member.voiceChannel
-                chan.join()
+                if (!message.member.voiceChannel) return message.channel.sendMessage('You need to be in a voice channel');
+                var chan = message.member.voiceChannel;
+                chan.join();
             }
-            let suffix = message.content.split(" ").slice(1).join(" ")
-            if (!suffix) return message.channel.sendMessage('You need to specify a song link or a song name!')
+            let suffix = message.content.split(" ").slice(1).join(" ");
+            if (!suffix) return message.channel.sendMessage('You need to specify a song link or a song name!');
 
-            play(message, getQueue(message.guild.id), suffix)
+            play(message, getQueue(message.guild.id), suffix);
         }
 	
 	if (message.content.startsWith(prefix + 'stop')) {
