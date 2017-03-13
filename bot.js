@@ -129,7 +129,7 @@ function play(msg, queue, song) {
             msg.channel.sendMessage(`Now Playing **${queue[0].title}** | Requested by ***${queue[0].requested}***`);
             console.log(`Playing ${queue[0].title} as requested by ${queue[0].requested} in ${msg.guild.name}`);
             bot.user.setGame('Playing: ' +queue[0].title+' | Connected servers: '+bot.guilds.size,'https://twitch.tv/'+twitchusername);
-            let connection = msg.guild.voiceConnection
+            let connection = msg.guild.voiceConnection;
             if (!connection) return console.log("No Connection!");
             intent = connection.playStream(queue[0].toplay);
 
