@@ -489,7 +489,7 @@ bot.on("message", function(message) {
                         found += `${(foundCounter)}. Username: ${warns[list[i]].user.name}\nAdmin: ${warns[list[i]].admin.name}\nServer: ${warns[list[i]].server.name}\nReason: ${warns[list[i]].reason}\n`;
                     }
                 }
-                if (foundCounter == 0) return message.channel.sendMessage("No warns recorded for that user");
+                if (foundCounter === 0) return message.channel.sendMessage("No warns recorded for that user");
                 message.channel.sendMessage(`Found ${foundCounter} warns\n ${found}`);
             } else {
                 message.channel.sendMessage('Only the admins can do this command');
@@ -531,7 +531,7 @@ bot.on("message", function(message) {
 
         if (message.content.startsWith(prefix + 'pause')) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                let player = message.guild.voiceConnection.player.dispatcher
+                let player = message.guild.voiceConnection.player.dispatcher;
                 if (!player || player.paused) return message.channel.sendMessage("Bot is not playing");
                 player.pause();
                 message.channel.sendMessage("Pausing music...");
@@ -550,59 +550,59 @@ bot.on("message", function(message) {
                 message.reply("I will PM you a reminder to " + reminder + " in " + time + "!");
                 setTimeout(function() {
                     message.channel.sendMessage(message.author + " Reminder: " + reminder);
-                }, time.countdown)
+                }, time.countdown);
 
                 function parseTime(str) {
-                    let num, time
+                    let num, time;
                     if (str.indexOf(" ") > -1) {
-                        num = str.substring(0, str.indexOf(" "))
-                        time = str.substring(str.indexOf(" ") + 1).toLowerCase()
+                        num = str.substring(0, str.indexOf(" "));
+                        time = str.substring(str.indexOf(" ") + 1).toLowerCase();
                     } else {
                         for (let i = 0; i < str.length; i++) {
                             if (str.substring(0, i) && !isNaN(str.substring(0, i)) && isNaN(str.substring(0, i + 1))) {
-                                num = str.substring(0, i)
-                                time = str.substring(i)
-                                break
+                                num = str.substring(0, i);
+                                time = str.substring(i);
+                                break;
                             }
                         }
                     }
                     if (!num || isNaN(num) || num < 1 || !time || ["d", "day", "days", "h", "hr", "hrs", "hour", "hours", "m", "min", "mins", "minute", "minutes", "s", "sec", "secs", "second", "seconds"].indexOf(time) == -1) {
                         return;
                     }
-                    let countdown = 0
+                    let countdown = 0;
                     switch (time) {
                         case "d":
                         case "day":
                         case "days":
-                            countdown = num * 86400000
-                            break
+                            countdown = num * 86400000;
+                            break;
                         case "h":
                         case "hr":
                         case "hrs":
                         case "hour":
                         case "hours":
-                            countdown = num * 3600000
-                            break
+                            countdown = num * 3600000;
+                            break;
                         case "m":
                         case "min":
                         case "mins":
                         case "minute":
                         case "minutes":
-                            countdown = num * 60000
-                            break
+                            countdown = num * 60000;
+                            break;
                         case "s":
                         case "sec":
                         case "secs":
                         case "second":
                         case "seconds":
-                            countdown = num * 1000
-                            break
+                            countdown = num * 1000;
+                            break;
                     }
                     return {
                         num: num,
                         time: time,
                         countdown: countdown
-                    }
+                    };
                 }
             } catch (err) {
                 message.channel.sendMessage("Invalid arguments.");
@@ -614,10 +614,10 @@ bot.on("message", function(message) {
                 message.channel.sendMessage("**Shutdown has been initiated**.\nShutting down...");
                 setTimeout(function() {
                     bot.destroy();
-                }, 1000)
+                }, 1000);
                 setTimeout(function() {
                     process.exit();
-                }, 2000)
+                }, 2000);
             }
         }
 
@@ -658,7 +658,7 @@ bot.on("message", function(message) {
                         "channel_id": message.channel.id
                     },
                     "reason": rsn
-                }
+                };
                 message.channel.sendMessage(usr + " was warned for `" + rsn + "`, check logs for more info");
                 fs.writeFile("./data/warns.json", JSON.stringify(warns));
             } else {
@@ -686,8 +686,7 @@ bot.on("message", function(message) {
             } else {
                 message.channel.sendMessage("Sorry, you do not have permissisons to use this command, **" + message.author.username + "**.");
             }
-        }
-
+	}
         if (message.content.startsWith(prefix + 'volume')) {
             let suffix = message.content.split(" ")[1];
             var player = message.guild.voiceConnection.player.dispatcher;
@@ -992,12 +991,17 @@ bot.on("message", function(message) {
               var data = JSON.parse(body);
               if(data.online){
                   message.channel.sendMessage(suffix
-                      + " is Active "
-                      + "\n ICON: "+data.favicon
-                      + "\n Online Players: "+data.players.online
-					  + "\n Max Players: "+data.players.max
-					  + "\n Online: "+data.online
-					  + "\n Version: "+data.version.name);
+               		+" is Active "
+			break;
+			+"\n ICON: "+data.favicon
+			break;
+              		+"\n Online Players: "+data.players.online
+			break;
+			+ "\n Max Players: "+data.players.max
+			break;
+			+ "\n Online: "+data.online
+			break;
+			+ "\n Version: "+data.version.name);
               }else{
                 message.channel.sendMessage(suffix+" is offline");
             }
@@ -1021,7 +1025,7 @@ bot.on("message", function(message) {
     }
 	if (message.content.startsWith(prefix1 + "8ball")) {
 		var suffix = message.content.split(" ").slice(1).join(" ");
-      if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
+      if(suffix === "" || suffix == null) return message.channel.sendMessage("Do " + prefix1 + "8ball <Question?> for your Awser!");
 		var mes = ["It is certain", "It is decidedly so" , "Without a doubt" , "Yes, definitely" , "You may rely on it" , "As I see it, yes" , "Most likely" , "Outlook good" , "Yes" , "Signs point to yes" , "Reply hazy try again" , "Ask again later" , "Better not tell you now" , "Cannot predict now" , "Concentrate and ask again" , "Don't count on it" , "My reply is no" , "The stars say no" , "Outlook not so good" , "Very doubtful"];
 		message.channel.sendMessage(mes[Math.floor(Math.random() * mes.length)]);
 	}
