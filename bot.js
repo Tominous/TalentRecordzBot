@@ -119,7 +119,7 @@ function play(msg, queue, song) {
                     "toplay": stream
                 })
                 console.log("Queued " + queue[queue.length - 1].title + " in " + msg.guild.name + " as requested by " + queue[queue.length - 1].requested)
-                msg.channel.sendMessage("Queued **" + queue[queue.length - 1].title + "**")
+                msg.channel.sendMessage("Queued **" + queue[queue.length - 1].title + "** Requested by ***${queue[0].requested}***")
                 if (test) {
                     setTimeout(function() {
                         play(msg, queue)
