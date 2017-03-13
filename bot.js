@@ -39,6 +39,7 @@ const prefix = config.prefix;
 const ytkey = config.youtube_api_key;
 const client_id = config.client_id;
 const twitchkey = config.twitch_api_key;
+const twitchusername = config.twitchusername;
 const serverport = config.server_port;
 const rb = "```"
 const sbl = require("./data/blservers.json")
@@ -108,7 +109,7 @@ function play(msg, queue, song) {
                 })
 
                 stream.on('error', function(error) {
-                    return msg.channel.sendMessage("Could not play video.");
+                    return msg.channel.sendMessage("Could not play video, or Video is Private. Please try another URL or SONGNAME!");
                 })
                 
                 let test
@@ -119,7 +120,7 @@ function play(msg, queue, song) {
                     "toplay": stream
                 })
                 console.log("Queued " + queue[queue.length - 1].title + " in " + msg.guild.name + " as requested by " + queue[queue.length - 1].requested)
-                msg.channel.sendMessage("Queued **" + queue[queue.length - 1].title + "** Requested by ***${queue[0].requested}***")
+                msg.channel.sendMessage("Queued **" + queue[queue.length - 1].title + "**")
                 if (test) {
                     setTimeout(function() {
                         play(msg, queue)
@@ -129,7 +130,7 @@ function play(msg, queue, song) {
         } else if (queue.length != 0) {
             msg.channel.sendMessage(`Now Playing **${queue[0].title}** | Requested by ***${queue[0].requested}***`)
             console.log(`Playing ${queue[0].title} as requested by ${queue[0].requested} in ${msg.guild.name}`);
-            bot.user.setGame(queue[0].title);
+            bot.user.setGame('Playing: ' +queue[0].title+' | Connected servers: '+bot.guilds.size,'https://twitch.tv/'+twitchusername);
             let connection = msg.guild.voiceConnection
             if (!connection) return console.log("No Connection!");
             intent = connection.playStream(queue[0].toplay)
@@ -154,7 +155,7 @@ function play(msg, queue, song) {
 
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/QWuVhAD) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -213,7 +214,7 @@ function isCommander(id) {
 bot.on('ready', function() {
     try {
         config.client_id = client_id;
-        bot.user.setStatus('online', config.status)
+//        bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/chisdealhd')
         var msg = `
 ------------------------------------------------------
 > Do 'git pull' periodically to keep your bot updated!
@@ -238,7 +239,7 @@ LET'S GO!
         }
         console.log("------------------------------------------------------")
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/QWuVhAD) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -262,7 +263,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 					var game = bot.user.presence.game.name;
                     delete paused[svr[i].voiceConnection.channel.id]
                     game = game.split("⏸")[1];
-					bot.user.setGame(game);
+					bot.user.setGame(+game,'https://twitch.tv/'+twitchusername);
                 }
             }
             if (svr[i].voiceConnection.channel.members.size === 1 && !svr[i].voiceConnection.player.dispatcher.paused) {
@@ -272,7 +273,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
                 paused[svr[i].voiceConnection.channel.id] = {
                     "player": svr[i].voiceConnection.player.dispatcher
                 }
-                bot.user.setGame("⏸ " + game);
+                bot.user.setGame("⏸ " + game,'https://twitch.tv/'+twitchusername);
             }
         }
     }
@@ -289,7 +290,7 @@ bot.on("message", function(message) {
                 return;
             }
         if (sbl.indexOf(message.guild.id) != -1 && message.content.startsWith(prefix)) {
-            message.channel.sendMessage("This server is blacklisted fucker!")
+            message.channel.sendMessage("This server is blacklisted Congratz on Blacklist Unit!")
             return
         }
         if (ubl.indexOf(message.author.id) != -1 && message.content.startsWith(prefix)) {
@@ -308,10 +309,20 @@ bot.on("message", function(message) {
 	if (message.content.startsWith(prefix + 'sleeping')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
 					let suffix = message.content.split(" ").slice(1).join(" ");
-					bot.user.setGame(suffix+ ' Is Sleeping DM him if needed | Do '+prefix+'help for More!','https://twitch.tv/'+suffix)
+					bot.user.setGame(suffix+ ' Is Sleeping DM him if needed | Do '+prefix+'help for More!','https://twitch.tv/'+twitchusername)
 					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Sleeping")
             } else {
                 message.channel.sendMessage('Only Owners and admins can set Streaming!');
+            }
+        }
+	if (message.content.startsWith(prefix + 'status')) {
+            if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
+					let suffix = message.content.split(" ").slice(1).join(" ")
+					var user = message.author.username;
+					bot.user.setGame(suffix ,'https://twitch.tv/'+twitchusername)
+					message.channel.sendMessage(":ok_hand:" +suffix+ " is now set as Status")
+            } else {
+                message.channel.sendMessage('Only Owners and admins can set Status!');
             }
         }
         if (message.content.startsWith(prefix + "ping")) {
@@ -345,7 +356,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }
@@ -377,6 +388,7 @@ bot.on("message", function(message) {
             queue.splice(i, 1);
 	    }
             chan.leave()
+	    bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername)
             message.channel.sendMessage(':wave: : no music then :( well im all alone!')
         }
 
@@ -817,40 +829,40 @@ bot.on("message", function(message) {
 	if (message.content === ":feelsgoodman") {
         message.channel.sendFile("./images/emotes/feelsgoodman.png")
     }
-    if (message.content === ":thecreedsclan") {
+        if (message.content === ":thecreedsclan") {
         message.channel.sendFile("./images/emotes/LOGO.png")
     }
-    if (message.content === ":ampenergycherry") {
+        if (message.content === ":ampenergycherry") {
         message.channel.sendFile("./images/emotes/AMPEnergyCherry.png")
     }
-    if (message.content === ":argieb8") {
+    	if (message.content === ":argieb8") {
         message.channel.sendFile("./images/emotes/ArgieB8.png")
     }
-    if (message.content === ":biblethump") {
+    	if (message.content === ":biblethump") {
         message.channel.sendFile("./images/emotes/biblethump.png")
     }
-    if (message.content === ":biersderp") {
+    	if (message.content === ":biersderp") {
         message.channel.sendFile("./images/emotes/biersderp.png")
     }
-    if (message.content === ":kapow") {
+    	if (message.content === ":kapow") {
         message.channel.sendFile("./images/emotes/kapow.png")
     }
-    if (message.content === ":lirik") {
+    	if (message.content === ":lirik") {
         message.channel.sendFile("./images/emotes/lirik.png")
     }
-    if (message.content === ":mau5") {
+    	if (message.content === ":mau5") {
         message.channel.sendFile("./images/emotes/Mau5.png")
     }
-    if (message.content === ":mcat") {
+    	if (message.content === ":mcat") {
         message.channel.sendFile("./images/emotes/mcaT.png")
     }
-    if (message.content === ":pjsalt") {
+    	if (message.content === ":pjsalt") {
         message.channel.sendFile("./images/emotes/PJSalt.png")
     }
-    if (message.content === ":pjsugar") {
+    	if (message.content === ":pjsugar") {
         message.channel.sendFile("./images/emotes/PJSugar.png")
     }
-    if (message.content === ":twitchRaid") {
+    	if (message.content === ":twitchRaid") {
         message.channel.sendFile("./images/emotes/twitchraid.png")
     }
 	if (message.content === ":gaben") {
@@ -859,7 +871,7 @@ bot.on("message", function(message) {
 	if (message.content === ":twitch") {
         message.channel.sendFile("./images/emotes/twitch.png")
     }
-    if (message.content === ":Illuminati") {
+    	if (message.content === ":Illuminati") {
         message.channel.sendFile("./images/emotes/Illuminati.png")
     }
 	if (message.content === ":dableft") {
@@ -868,11 +880,11 @@ bot.on("message", function(message) {
 	if (message.content === ":dabright") {
         message.channel.sendFile("./images/emotes/dabright.png")
     }
-    if (message.content === prefix + "donate"){
+    	if (message.content === prefix + "donate"){
         message.channel.sendMessage("Donate  HERE! show some LOVE <3 https://streamjar.tv/tip/chisdealhd")
     }
 	
-		if (message.content.startsWith(prefix + 'beam')) {
+	if (message.content.startsWith(prefix + 'beam')) {
 	  var suffix1 = message.content.split(" ").slice(1).join(" ");
 	  if(suffix1 == "" || suffix1 == null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
     request("https://beam.pro/api/v1/channels/"+suffix1,
@@ -910,6 +922,10 @@ bot.on("message", function(message) {
       value: data1.user.level
     },
 	{
+      name: 'Sparks:',
+      value: data1.user.sparks
+    },
+	{
       name: 'AGE Rate:',
       value: data1.audience
     },
@@ -937,7 +953,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }else{
@@ -959,7 +975,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }
@@ -1112,7 +1128,7 @@ bot.on("message", function(message) {
       timestamp: new Date(),
   footer: {
     icon_url: bot.user.avatarURL,
-    text: '© TalentRecordz'
+    text: '© ' + bot.user.username
   }
 }});
   }
@@ -1126,7 +1142,7 @@ bot.on("message", function(message) {
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/QWuVhAD) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -1138,6 +1154,20 @@ bot.on("message", function(message) {
 
     }
 })
+
+bot.on('ready', function() {
+	setInterval(() => {
+        fs.readFile('./status.txt', 'utf8', function(err, data) {
+        var games = data.toString().split('\n')
+        bot.user.setGame(games[Math.floor(Math.random()* games.length)]+ ' | Bot Prefix ' +prefix+' | '+bot.guilds.size+' Connected Servers','https://twitch.tv/'+twitchusername, function(err) {
+        console.log(games)
+            if (err) {
+                message.channel.sendMessage("ERROR has be MADE!" + err);
+            }
+       });
+    });
+}, 120000)
+});
 
 bot.login(config.token)
 
@@ -1155,6 +1185,7 @@ app.listen(process.env.PORT || + serverport);
 // END Roboto SETUP
 
 process.on("unhandledRejection", err => {
-    console.error("Uncaught We had a promise error, if this keeps happening report to dev server: \n" + err.stack);
+    console.error("Uncaught We had a promise error, if this keeps happening report to dev server (https://discord.gg/EX642f8): \n" + err.stack);
 });
+
 
