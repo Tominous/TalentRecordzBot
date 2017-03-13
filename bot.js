@@ -378,7 +378,7 @@ bot.on("message", function(message) {
 	
 	if (message.content.startsWith(prefix + 'stop')) {
             var chan = message.member.voiceChannel
-	    let player = message.voiceConnection.player.AudioPlayer.dispatcher
+	    let player = message.guild.voiceConnection.player.dispatche
 	    let queue = getQueue(message.guild.id);
 	    player.pause()
 	    for (var i = queue.length - 1; i >= 0; i--) {
