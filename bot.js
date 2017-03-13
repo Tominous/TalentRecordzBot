@@ -233,7 +233,7 @@ LET'S GO!
             fs.writeFile("./data/errors.json", JSON.stringify(errorlog), function(err) {
                 if (err) return console.log("Uh oh we couldn't wipe the error log");
                 console.log("Just to say, we have wiped the error log on your system as its size was too large");
-            })
+            });
         }
         console.log("------------------------------------------------------");
     } catch (err) {
@@ -244,14 +244,14 @@ LET'S GO!
             "stack": err.stack
         };
         fs.writeFile("./data/errors.json", JSON.stringify(errorlog), function(err) {
-            if (err) return console.log("Even worse we couldn't write to our error log file! Make sure data/errors.json still exists!")
+            if (err) return console.log("Even worse we couldn't write to our error log file! Make sure data/errors.json still exists!");
         });
 
     }
 });
 
 bot.on('voiceStateUpdate', function(oldMember, newMember) {
-	var svr = bot.guilds.array()
+	var svr = bot.guilds.array();
     for (var i = 0; i < svr.length; i++) {
         if (svr[i].voiceConnection) {
             if (paused[svr[i].voiceConnection.channel.id]) {
@@ -259,7 +259,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
                     //svr[i].defaultChannel.sendMessage("I resumed my music in " + svr[i].voiceConnection.channel.name)
 					paused[svr[i].voiceConnection.channel.id].player.resume();
 					var game = bot.user.presence.game.name;
-                    delete paused[svr[i].voiceConnection.channel.id]
+                    delete paused[svr[i].voiceConnection.channel.id];
                     game = game.split("⏸")[1];
 					bot.user.setGame(+game,'https://twitch.tv/'+twitchusername);
                 }
@@ -270,7 +270,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
                 var game = bot.user.presence.game.name;
                 paused[svr[i].voiceConnection.channel.id] = {
                     "player": svr[i].voiceConnection.player.dispatcher
-                }
+                };
                 bot.user.setGame("⏸ " + game,'https://twitch.tv/'+twitchusername);
             }
         }
@@ -279,7 +279,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 
 bot.on("message", function(message) {
     try {
-        if (message.author.bot) return
+        if (message.author.bot) return;
 		if (message.channel.type === "dm") return;
         if (message.author === bot.user)
             if (message.guild === undefined) {
@@ -289,11 +289,11 @@ bot.on("message", function(message) {
             }
         if (sbl.indexOf(message.guild.id) != -1 && message.content.startsWith(prefix)) {
             message.channel.sendMessage("This server is blacklisted Congratz on Blacklist Unit!");
-            return
+            return;
         }
         if (ubl.indexOf(message.author.id) != -1 && message.content.startsWith(prefix)) {
             message.reply(" you are blacklisted and can not use the bot!");
-            return
+            return;
         }
 	if (message.content.startsWith(prefix + 'setstream')) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
@@ -329,7 +329,7 @@ bot.on("message", function(message) {
                 var after = Date.now();
                 msg.edit("Pong! **" + (after - before) + "**ms");
 
-            })
+            });
         }
      if (message.content === prefix + 'help') {
     message.channel.sendMessage("", {embed: {
@@ -381,16 +381,16 @@ bot.on("message", function(message) {
 		if(!message.guild.voiceConnection)
                  	  console.error("No voice connection");
 		else {
-            	var chan = message.member.voiceChannel
-	    	let player = message.guild.voiceConnection.player.dispatche
+            	var chan = message.member.voiceChannel;
+	    	let player = message.guild.voiceConnection.player.dispatche;
 	    	let queue = getQueue(message.guild.id);
-	    	player.pause()
+	    	player.pause();
 	    	for (var i = queue.length - 1; i >= 0; i--) {
             	queue.splice(i, 1);
-	    	}
-            	chan.leave()
-	    	bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername)
-            	message.channel.sendMessage(':wave: : no music then :( well im all alone!')
+	    	};
+            	chan.leave();
+	    	bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername);
+            	message.channel.sendMessage(':wave: : no music then :( well im all alone!');
 		}
         }
 
@@ -399,20 +399,20 @@ bot.on("message", function(message) {
         }
         if (message.content.startsWith(prefix + "serverblacklist")) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                let c = message.content.split(" ").splice(1).join(" ")
-                let args = c.split(" ")
-                console.log("[DEVELOPER DEBUG] Blacklist args were: " + args)
+                let c = message.content.split(" ").splice(1).join(" ");
+                let args = c.split(" ");
+                console.log("[DEVELOPER DEBUG] Blacklist args were: " + args);
                 if (args[0] === "remove") {
-                    sbl.splice(sbl.indexOf(args[1]))
-                    fs.writeFile("./data/blservers.json", JSON.stringify(sbl))
+                    sbl.splice(sbl.indexOf(args[1]));
+                    fs.writeFile("./data/blservers.json", JSON.stringify(sbl));
                 } else if (args[0] === "add") {
-                    sbl.push(args[1])
-                    fs.writeFile("./data/blservers.json", JSON.stringify(sbl))
+                    sbl.push(args[1]);
+                    fs.writeFile("./data/blservers.json", JSON.stringify(sbl));
                 } else {
-                    message.channel.sendMessage(`You need to specify what to do! ${prefix}serverblacklist <add/remove> <server id>`)
+                    message.channel.sendMessage(`You need to specify what to do! ${prefix}serverblacklist <add/remove> <server id>`);
                 }
             } else {
-                message.channel.sendMessage("Sorry, this command is for the owner only.")
+                message.channel.sendMessage("Sorry, this command is for the owner only.");
             }
 
         }
@@ -420,43 +420,43 @@ bot.on("message", function(message) {
             if (notes[message.author.id] === undefined) {
                 notes[message.author.id] = {
                     'notes': []
-                }
+                };
             }
             notes[message.author.id].notes[notes[message.author.id].notes.length] = {
                 'content': message.cleanContent.split(" ").splice(1).join(" "),
                 'time': Date()
-            }
+            };
             fs.writeFile('./data/notes.json', JSON.stringify(notes), function(err) {
                 if (err) return;
-                message.channel.sendMessage('Added to notes! Type `' + prefix + 'mynotes` to see all your notes')
+                message.channel.sendMessage('Added to notes! Type `' + prefix + 'mynotes` to see all your notes');
             })
         }
         if (message.content === prefix + 'mynotes') {
-            var nutes = 'Here are your notes:\n\n```'
+            var nutes = 'Here are your notes:\n\n```';
             for (var i = 0; i < notes[message.author.id].notes.length; i++) {
-                nutes += `${i + 1}) '${notes[message.author.id].notes[i].content}' - Added ${notes[message.author.id].notes[i].time}\n`
+                nutes += `${i + 1}) '${notes[message.author.id].notes[i].content}' - Added ${notes[message.author.id].notes[i].time}\n`;
             }
 
-            nutes += "```"
-            message.channel.sendMessage(nutes)
+            nutes += "```";
+            message.channel.sendMessage(nutes);
         }
 
         if (message.content.startsWith(prefix + "userblacklist")) {
             if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                let c = message.content.split(" ").splice(1).join(" ")
-                let args = c.split(" ")
-                console.log("[DEVELOPER DEBUG] Blacklist args were: " + args)
+                let c = message.content.split(" ").splice(1).join(" ");
+                let args = c.split(" ");
+                console.log("[DEVELOPER DEBUG] Blacklist args were: " + args);
                 if (args[0] === "remove") {
-                    ubl.splice(ubl.indexOf(args[1]))
-                    fs.writeFile("./data/blusers.json", JSON.stringify(ubl))
+                    ubl.splice(ubl.indexOf(args[1]));
+                    fs.writeFile("./data/blusers.json", JSON.stringify(ubl));
                 } else if (args[0] === "add") {
-                    ubl.push(args[1])
-                    fs.writeFile("./data/blusers.json", JSON.stringify(sbl))
+                    ubl.push(args[1]);
+                    fs.writeFile("./data/blusers.json", JSON.stringify(sbl));
                 } else {
-                    message.channel.sendMessage(`You need to specify what to do! ${prefix}serverblacklist <add/remove> <server id>`)
+                    message.channel.sendMessage(`You need to specify what to do! ${prefix}serverblacklist <add/remove> <server id>`);
                 }
             } else {
-                message.channel.sendMessage("Sorry, this command is for the owner only.")
+                message.channel.sendMessage("Sorry, this command is for the owner only.");
             }
 
         }
@@ -468,7 +468,7 @@ bot.on("message", function(message) {
                 for (var i = queue.length - 1; i >= 0; i--) {
                     queue.splice(i, 1);
                 }
-                message.channel.sendMessage(`Cleared the queue`)
+                message.channel.sendMessage(`Cleared the queue`);
             } else {
                 message.channel.sendMessage('Only the admins can do this command');
             }
@@ -489,7 +489,7 @@ bot.on("message", function(message) {
                         found += `${(foundCounter)}. Username: ${warns[list[i]].user.name}\nAdmin: ${warns[list[i]].admin.name}\nServer: ${warns[list[i]].server.name}\nReason: ${warns[list[i]].reason}\n`;
                     }
                 }
-                if (foundCounter == 0) return message.channel.sendMessage("No warns recorded for that user")
+                if (foundCounter == 0) return message.channel.sendMessage("No warns recorded for that user");
                 message.channel.sendMessage(`Found ${foundCounter} warns\n ${found}`);
             } else {
                 message.channel.sendMessage('Only the admins can do this command');
@@ -498,10 +498,10 @@ bot.on("message", function(message) {
 
         if (message.content.startsWith(prefix + 'skip')) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1 || message.channel.permissionsFor(message.member).hasPermission('MANAGE_SERVER')) {
-                let player = message.guild.voiceConnection.player.dispatcher
+                let player = message.guild.voiceConnection.player.dispatcher;
                 if (!player || player.paused) return message.channel.sendMessage("Bot is not playing!")
                 message.channel.sendMessage('Skipping song...');
-                player.end()
+                player.end();
             } else {
                 message.channel.sendMessage('Only the admins can do this command');
             }
