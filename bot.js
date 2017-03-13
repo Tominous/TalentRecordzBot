@@ -992,12 +992,12 @@ bot.on("message", function(message) {
               var data = JSON.parse(body);
               if(data.online){
                   message.channel.sendMessage(suffix
-                      +" is Active "
-                      +"\n ICON: "+data.favicon
-                      +"\n Online Players: "+data.players.online
-					  +"\n Max Players: "+data.players.max
-					  +"\n Online: "+data.online
-					  +"\n Version: "+data.version.name);
+                      + " is Active "
+                      + "\n ICON: "+data.favicon
+                      + "\n Online Players: "+data.players.online
+					  + "\n Max Players: "+data.players.max
+					  + "\n Online: "+data.online
+					  + "\n Version: "+data.version.name);
               }else{
                 message.channel.sendMessage(suffix+" is offline");
             }
