@@ -4,9 +4,8 @@
 
 <img src="https://cdn.discordapp.com/attachments/263639645647142912/264362236913516545/vaavassvasv_copy.png" alt="TakentRecordz" style="width:50px;height:50px;">
 
-DiscordJS Discord Bot made by ChisdealHD and Official bot made from JoeBanks13
+DiscordJS Discord Bot made by ChisdealHD
 
-Official bot: https://github.com/JoeBanks13/Music-Butt
 
 This bot Pre-Configure by Chisdealhd & Bacon_Space, so not only musicbot got few client stuff too.
 
