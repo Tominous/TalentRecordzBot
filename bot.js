@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 /*
  * Chis's Music Bot
  * Developed by ChisdealHD & Bacon_Space
