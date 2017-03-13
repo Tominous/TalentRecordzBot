@@ -377,16 +377,20 @@ bot.on("message", function(message) {
         }
 	
 	if (message.content.startsWith(prefix + 'stop')) {
-            var chan = message.member.voiceChannel
-	    let player = message.guild.voiceConnection.player.dispatche
-	    let queue = getQueue(message.guild.id);
-	    player.pause()
-	    for (var i = queue.length - 1; i >= 0; i--) {
-            queue.splice(i, 1);
-	    }
-            chan.leave()
-	    bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername)
-            message.channel.sendMessage(':wave: : no music then :( well im all alone!')
+		if(!message.guild.voiceConnection)
+                 	  console.error("No voice connection");
+		else {
+            	var chan = message.member.voiceChannel
+	    	let player = message.guild.voiceConnection.player.dispatche
+	    	let queue = getQueue(message.guild.id);
+	    	player.pause()
+	    	for (var i = queue.length - 1; i >= 0; i--) {
+            	queue.splice(i, 1);
+	    	}
+            	chan.leave()
+	    	bot.user.setGame('Do '+prefix+'help for more | made by ChisdealHD | '+bot.guilds.size+' Connected Servers ' +prefix+ 'invite for invite bot','https://twitch.tv/'+twitchusername)
+            	message.channel.sendMessage(':wave: : no music then :( well im all alone!')
+		}
         }
 
         if (message.content.startsWith(prefix + 'sys')) {
