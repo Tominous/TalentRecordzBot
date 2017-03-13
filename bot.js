@@ -154,7 +154,7 @@ function play(msg, queue, song) {
 
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/WAzJfJT) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/QWuVhAD) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -238,7 +238,7 @@ LET'S GO!
         }
         console.log("------------------------------------------------------")
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/WAzJfJT) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/QWuVhAD) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
@@ -1126,7 +1126,7 @@ bot.on("message", function(message) {
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/WAzJfJT) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/QWuVhAD) and quote this error:\n\n\n" + err.stack)
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
