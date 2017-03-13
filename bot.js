@@ -64,22 +64,22 @@ const opts = {
     part: 'snippet',
     maxResults: 10,
     key: config.youtube_api_key
-}
+};
 var intent;
 
 function getQueue(guild) {
-    if (!guild) return
-    if (typeof guild == 'object') guild = guild.id
-    if (queues[guild]) return queues[guild]
-    else queues[guild] = []
-    return queues[guild]
+    if (!guild) return;
+    if (typeof guild == 'object') guild = guild.id;
+    if (queues[guild]) return queues[guild];
+    else queues[guild] = [];
+    return queues[guild];
 }
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * (max + 1));
 }
 
-var paused = {}
+var paused = {};
 
 //Fix dis shit
 function getRandomMusic(queue, msg) {
@@ -89,10 +89,10 @@ function getRandomMusic(queue, msg) {
         var random = data.split('\n');
 
         var num = getRandomInt(random.length);
-        console.log(random[num])
+        console.log(random[num]);
         var url = random[num];
         msg.author.username = "AUTOPLAYLIST";
-        play(msg, queue, url)
+        play(msg, queue, url);
     });
 }
 
@@ -103,47 +103,47 @@ function play(msg, queue, song) {
         if (song) {
             search(song, opts, function(err, results) {
                 if (err) return msg.channel.sendMessage("Video not found please try to use a youtube link instead.");
-                song = (song.includes("https://" || "http://")) ? song : results[0].link
+                song = (song.includes("https://" || "http://")) ? song : results[0].link;
                 let stream = ytdl(song, {
                     audioonly: true
-                })
+                });
                 stream.on('error', function(error) {
                     return msg.channel.sendMessage("Could not play video, or Video is Private. Please try another URL or SONGNAME!");
-                })
-                let test
-                if (queue.length === 0) test = true
+                });
+                let test;
+                if (queue.length === 0) test = true;
                 queue.push({
                     "title": results[0].title,
                     "requested": msg.author.username,
                     "toplay": stream
-                })
-                console.log("Queued " + queue[queue.length - 1].title + " in " + msg.guild.name + " as requested by " + queue[queue.length - 1].requested)
-                msg.channel.sendMessage("Queued **" + queue[queue.length - 1].title + "**")
+                });
+                console.log("Queued " + queue[queue.length - 1].title + " in " + msg.guild.name + " as requested by " + queue[queue.length - 1].requested);
+                msg.channel.sendMessage("Queued **" + queue[queue.length - 1].title + "**");
                 if (test) {
                     setTimeout(function() {
-                        play(msg, queue)
-                    }, 1000)
+                        play(msg, queue);
+                    }, 1000);
                 }
-            })
-        } else if (queue.length != 0) {
-            msg.channel.sendMessage(`Now Playing **${queue[0].title}** | Requested by ***${queue[0].requested}***`)
+            });
+        } else if (queue.length !== 0) {
+            msg.channel.sendMessage(`Now Playing **${queue[0].title}** | Requested by ***${queue[0].requested}***`);
             console.log(`Playing ${queue[0].title} as requested by ${queue[0].requested} in ${msg.guild.name}`);
             bot.user.setGame('Playing: ' +queue[0].title+' | Connected servers: '+bot.guilds.size,'https://twitch.tv/'+twitchusername);
             let connection = msg.guild.voiceConnection
             if (!connection) return console.log("No Connection!");
-            intent = connection.playStream(queue[0].toplay)
+            intent = connection.playStream(queue[0].toplay);
 
             intent.on('error', () => {
-                queue.shift()
-                play(msg, queue)
-            })
+                queue.shift();
+                play(msg, queue);
+            });
 
             intent.on('end', () => {
-                queue.shift()
-                play(msg, queue)
-            })
+                queue.shift();
+                play(msg, queue);
+            });
         } else {
-            msg.channel.sendMessage('No more music in queue! Starting autoplaylist')
+            msg.channel.sendMessage('No more music in queue! Starting autoplaylist');
 
 
             //TODO: When no more music, play randomly from playlist
@@ -153,15 +153,15 @@ function play(msg, queue, song) {
 
         }
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack);
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
             "stack": err.stack
-        }
+        };
         fs.writeFile("./data/errors.json", JSON.stringify(errorlog), function(err) {
             if (err) return console.log("Even worse we couldn't write to our error log file! Make sure data/errors.json still exists!");
-        })
+        });
 
     }
 }
@@ -192,7 +192,7 @@ function secondsToString(seconds) {
         }
         return str;
     } catch (err) {
-        console.log("Could not get time")
+        console.log("Could not get time");
         return 'Could not get time';
     }
 }
@@ -223,32 +223,32 @@ On ${bot.guilds.size} servers!
 ${bot.channels.size} channels and ${bot.users.size} users cached!
 Bot is logged in and ready to play some tunes!
 LET'S GO!
-------------------------------------------------------`
+------------------------------------------------------`;
 
-        console.log(msg)
-        var errsize = Number(fs.statSync("./data/errors.json")["size"])
-        console.log("Current error log size is " + errsize + " Bytes")
+        console.log(msg);
+        var errsize = Number(fs.statSync("./data/errors.json")["size"]);
+        console.log("Current error log size is " + errsize + " Bytes");
         if (errsize > 5000) {
-            errorlog = {}
+            errorlog = {};
             fs.writeFile("./data/errors.json", JSON.stringify(errorlog), function(err) {
                 if (err) return console.log("Uh oh we couldn't wipe the error log");
-                console.log("Just to say, we have wiped the error log on your system as its size was too large")
+                console.log("Just to say, we have wiped the error log on your system as its size was too large");
             })
         }
-        console.log("------------------------------------------------------")
+        console.log("------------------------------------------------------");
     } catch (err) {
-        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack)
+        console.log("WELL LADS LOOKS LIKE SOMETHING WENT WRONG! Visit MusicBot server for support (https://discord.gg/EX642f8) and quote this error:\n\n\n" + err.stack);
         errorlog[String(Object.keys(errorlog).length)] = {
             "code": err.code,
             "error": err,
             "stack": err.stack
-        }
+        };
         fs.writeFile("./data/errors.json", JSON.stringify(errorlog), function(err) {
-            if (err) return console.log("Even worse we couldn't write to our error log file! Make sure data/errors.json still exists!");
-        })
+            if (err) return console.log("Even worse we couldn't write to our error log file! Make sure data/errors.json still exists!")
+        });
 
     }
-})
+});
 
 bot.on('voiceStateUpdate', function(oldMember, newMember) {
 	var svr = bot.guilds.array()
@@ -257,7 +257,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
             if (paused[svr[i].voiceConnection.channel.id]) {
                 if (svr[i].voiceConnection.channel.members.size > 1) {
                     //svr[i].defaultChannel.sendMessage("I resumed my music in " + svr[i].voiceConnection.channel.name)
-					paused[svr[i].voiceConnection.channel.id].player.resume()
+					paused[svr[i].voiceConnection.channel.id].player.resume();
 					var game = bot.user.presence.game.name;
                     delete paused[svr[i].voiceConnection.channel.id]
                     game = game.split("⏸")[1];
