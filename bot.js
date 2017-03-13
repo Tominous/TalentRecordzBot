@@ -53,10 +53,9 @@ const prefix1 = "hey talent, ";
 const request = require('request');
 const opus = require('opusscript');
 const cheerio = require('cheerio');
-const 
-  , express = require('express')
-  , logger = require('morgan')
-  , app = express()
+const express = require('express');
+const logger = require('morgan');
+const app = express();
 const markdown = require( "markdown" ).markdown;
 const startTime = Date.now();
 const invite = "My OAuth URL: " + `http://discordapp.com/oauth2/authorize?client_id=${config.client_id}&scope=bot`;
