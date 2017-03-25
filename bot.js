@@ -23,7 +23,7 @@ try {
             "owner_id": config.owner_id,
             "status": "Musicccc",
             "youtube_api_key": process.env.YOUTUBE_API_KEY,
-	    "twitch_api_key": config.twitch_api_key,
+	          "twitch_api_key": config.twitch_api_key,
             "admins": config.admins
         }
     } else {
@@ -111,7 +111,7 @@ function play(msg, queue, song) {
                 stream.on('error', function(error) {
                     return msg.channel.sendMessage("Could not play video, or Video is Private. Please try another URL or SONGNAME!");
                 })
-                
+
                 let test
                 if (queue.length === 0) test = true
                 queue.push({
@@ -378,7 +378,7 @@ bot.on("message", function(message) {
 
             play(message, getQueue(message.guild.id), suffix)
         }
-	
+
 	if (message.content.startsWith(prefix + 'stop')) {
             var chan = message.member.voiceChannel
 	    let player = message.guild.voiceConnection.player.dispatcher
@@ -530,7 +530,7 @@ bot.on("message", function(message) {
         if (message.content.startsWith(prefix + 'pause')) {
             if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
                 let player = message.guild.voiceConnection.player.dispatcher
-                if (!player || player.paused) return message.channel.sendMessage("Bot is not playing")
+                if (typeof player == 'undefined' || player.paused) return message.channel.sendMessage("Bot is not playing")
                 player.pause();
                 message.channel.sendMessage("Pausing music...");
             } else {
@@ -723,7 +723,7 @@ bot.on("message", function(message) {
         if (message.content.startsWith(prefix + 'git')) {
             message.channel.sendMessage("GitHub URL: **https://github.com/ChisdealHD/TalentRecordzBot**")
         }
-		
+
 	if (message.content === ":kappa") {
         message.channel.sendFile("./images/emotes/kappa.png")
     }
@@ -883,106 +883,118 @@ bot.on("message", function(message) {
     	if (message.content === prefix + "donate"){
         message.channel.sendMessage("Donate  HERE! show some LOVE <3 https://streamjar.tv/tip/chisdealhd")
     }
-	
+
 	if (message.content.startsWith(prefix + 'beam')) {
 	  var suffix1 = message.content.split(" ").slice(1).join(" ");
 	  if(suffix1 == "" || suffix1 == null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
     request("https://beam.pro/api/v1/channels/"+suffix1,
     function(err,res,body){
               var data1 = JSON.parse(body);
+
+              //if there is an error
+              if(typeof data1.error !== "undefined") {
+                if(data1.statusCode == 404) {
+                  return message.channel.sendMessage(data1.message)
+                }else {
+                  return message.channel.sendMessage("An error occurred please consult the manual.")
+                  console.warn("An error occurred whilst looking up channel, printing json response:")
+                  console.warn(data1)
+                }
+              }
+
               if(data1.online){
                   message.channel.sendMessage("", {embed: {
-  color: 0xd44a43,
-  author: {
-    name: suffix1,
-    icon_url: data1.user.avatarUrl
-  },
-  title: 'Beam.pro',
-  url: 'https://beam.pro/' + suffix1 + '/',
-  description: suffix1 + ' Beam Channel',
-  fields: [
-    {
-      name: 'Followers:',
-      value: data1.numFollowers
-    },
-	{
-      name: 'Title:',
-      value: data1.name
-    },
-	{
-      name: 'Live viewers:',
-      value: data1.viewersCurrent
-    },
-	{
-      name: 'Total Viewers:',
-      value: data1.viewersTotal
-    },
-	{
-      name: 'Level:',
-      value: data1.user.level
-    },
-	{
-      name: 'Sparks:',
-      value: data1.user.sparks
-    },
-	{
-      name: 'AGE Rate:',
-      value: data1.audience
-    },
-	{
-      name: ' Partnered',
-	  value: data1.partnered
-    },
-    {
-      name: ' Facebook',
-	  value: ' [Facebook](' + data1.user.social.facebook + ').'
-    },
-	{
-      name: ' Twitter',
-	  value: ' [Twitter](' + data1.user.social.twitter + ').'
-    },
-	{
-      name: ' YouTube',
-	  value: ' [Youtube](' + data1.user.social.youtube + ').'
-    },
-	{
-      name: ' Player.me',
-	  value: ' [Player.me](' + data1.user.social.player + ').'
-    }
-    ],
-      timestamp: new Date(),
-  footer: {
-    icon_url: bot.user.avatarURL,
-    text: '© ' + bot.user.username
-  }
-}});
-  }else{
-                message.channel.sendMessage("", {embed: {
-  color: 0xe1ddda,
-  author: {
-    name: suffix1,
-    icon_url: data1.user.avatarUrl
-  },
-  title: 'Beam.pro',
-  url: 'https://beam.pro/' + suffix1 + '/',
-  description: suffix1 + ' Beam Channel',
-  fields: [
-    {
-      name: 'Streaming:',
-      value: suffix1 + ' is OFFLINE! </3 :('
-    }
-    ],
-      timestamp: new Date(),
-  footer: {
-    icon_url: bot.user.avatarURL,
-    text: '© ' + bot.user.username
-  }
-}});
-  }
-  });
+                    color: 0xd44a43,
+                    author: {
+                      name: suffix1,
+                      icon_url: data1.user.avatarUrl
+                    },
+                    title: 'Beam.pro',
+                    url: 'https://beam.pro/' + suffix1 + '/',
+                    description: suffix1 + ' Beam Channel',
+                    fields: [
+                      {
+                        name: 'Followers:',
+                        value: data1.numFollowers
+                      },
+                  	{
+                        name: 'Title:',
+                        value: data1.name
+                      },
+                  	{
+                        name: 'Live viewers:',
+                        value: data1.viewersCurrent
+                      },
+                  	{
+                        name: 'Total Viewers:',
+                        value: data1.viewersTotal
+                      },
+                  	{
+                        name: 'Level:',
+                        value: data1.user.level
+                      },
+                  	{
+                        name: 'Sparks:',
+                        value: data1.user.sparks
+                      },
+                  	{
+                        name: 'AGE Rate:',
+                        value: data1.audience
+                      },
+                  	{
+                        name: ' Partnered',
+                  	  value: data1.partnered
+                      },
+                      {
+                        name: ' Facebook',
+                  	  value: ' [Facebook](' + data1.user.social.facebook + ').'
+                      },
+                  	{
+                        name: ' Twitter',
+                  	  value: ' [Twitter](' + data1.user.social.twitter + ').'
+                      },
+                  	{
+                        name: ' YouTube',
+                  	  value: ' [Youtube](' + data1.user.social.youtube + ').'
+                      },
+                  	{
+                        name: ' Player.me',
+                  	  value: ' [Player.me](' + data1.user.social.player + ').'
+                      }
+                      ],
+                        timestamp: new Date(),
+                    footer: {
+                      icon_url: bot.user.avatarURL,
+                      text: '© ' + bot.user.username
+                    }
+                  }});
+                    }else{
+                                  message.channel.sendMessage("", {embed: {
+                    color: 0xe1ddda,
+                    author: {
+                      name: suffix1,
+                      icon_url: data1.user.avatarUrl
+                    },
+                    title: 'Beam.pro',
+                    url: 'https://beam.pro/' + suffix1 + '/',
+                    description: suffix1 + ' Beam Channel',
+                    fields: [
+                      {
+                        name: 'Streaming:',
+                        value: suffix1 + ' is OFFLINE! </3 :('
+                      }
+                      ],
+                        timestamp: new Date(),
+                    footer: {
+                      icon_url: bot.user.avatarURL,
+                      text: '© ' + bot.user.username
+                    }
+                  }});
+                    }
+                    });
   }
 
-	
+
 	if (message.content.startsWith(prefix + 'MCserverchecker')) {
 	  var suffix = message.content.split(" ").slice(1).join(" ");
 	   if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "MCserverchecker <IP:PORT> for Checking Server is Online for Minecraft!");
@@ -1187,5 +1199,3 @@ app.listen(process.env.PORT || + serverport);
 process.on("unhandledRejection", err => {
     console.error("Uncaught We had a promise error, if this keeps happening report to dev server (https://discord.gg/EX642f8): \n" + err.stack);
 });
-
-
