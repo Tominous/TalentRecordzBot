@@ -1192,7 +1192,7 @@ bot.on('ready', function() {
         }
 		var stream = JSON.parse(body);
 				if(stream.stream){
-					bot.user.setGame(twitchusername+'IS NOW LIVE! come and check him out!','https://twitch.tv/'+twitchusername);
+					bot.user.setGame(twitchusername + 'IS NOW LIVE! come and check him out!','https://twitch.tv/'+twitchusername);
 				} else {
         fs.readFile('./status.txt', 'utf8', function(err, data) {
         var games = data.toString().split('\n')
