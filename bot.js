@@ -1194,6 +1194,7 @@ bot.on('ready', function() {
 				if(stream.stream){
 					bot.user.setGame(twitchusername + 'IS NOW LIVE! come and check him out!','https://twitch.tv/'+twitchusername);
 				} else {
+	if(stream.stream = null){
         fs.readFile('./status.txt', 'utf8', function(err, data) {
         var games = data.toString().split('\n')
         bot.user.setGame(games[Math.floor(Math.random()* games.length)]+ ' | Bot Prefix ' +prefix+' | '+bot.guilds.size+' Connected Servers','https://twitch.tv/'+twitchusername, function(err) {
@@ -1203,7 +1204,8 @@ bot.on('ready', function() {
             }
        });
     });
-}, 120000)
+}, 1000
+}
 });
 
 bot.login(config.token)
