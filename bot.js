@@ -1182,19 +1182,19 @@ bot.on("message", function(message) {
 //});
 
 bot.on('ready', function() {
-	setInterval(() => {
-	    request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id="+twitchkey,
-			function(err,res,body){
-				if(err) {
-					console.log('Error encounterd: '+err);
-					message.channel.sendMessage("Horrible stuff happend D:. Try again later.");
-					return;
+    setInterval(() => {
+        request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id="+twitchkey,
+            function(err,res,body){
+                if(err) {
+                    console.log('Error encounterd: '+err);
+                    message.channel.sendMessage("Horrible stuff happend D:. Try again later.");
+                    return;
         }
-		var stream = JSON.parse(body);
-				if(stream.stream){
-					bot.user.setGame(twitchusername + 'IS NOW LIVE! come and check him out!','https://twitch.tv/'+twitchusername);
-				} else {
-	if(stream.stream = null){
+        var stream = JSON.parse(body);
+                if(stream.stream){
+                    bot.user.setGame(twitchusername + 'IS NOW LIVE! come and check him out!','https://twitch.tv/'+twitchusername);
+                } else {
+    if(stream.stream == null){
         fs.readFile('./status.txt', 'utf8', function(err, data) {
         var games = data.toString().split('\n')
         bot.user.setGame(games[Math.floor(Math.random()* games.length)]+ ' | Bot Prefix ' +prefix+' | '+bot.guilds.size+' Connected Servers','https://twitch.tv/'+twitchusername, function(err) {
@@ -1204,7 +1204,7 @@ bot.on('ready', function() {
             }
        });
     });
-} 1000
+}, 1000)
 };
 });
 
