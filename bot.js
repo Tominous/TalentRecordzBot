@@ -1206,7 +1206,6 @@ bot.on('ready', function() {
        });
     });
 }, 1000)
-})
 });
 
 bot.login(config.token)
