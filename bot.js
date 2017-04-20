@@ -1000,6 +1000,16 @@ if (message.content.startsWith(prefix+"beam ")) {
 		var user = message.author.username;
         message.channel.sendMessage("Your name is: " + user)
     }
+	if (message.content.startsWith(prefix + "ascii")) {
+        message.delete(1000);
+        var input = message.content.replace(prefix + "ascii ", "");
+        request("https://artii.herokuapp.com/make?text=" + input, function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                var ascii = body;
+                message.channel.sendMessage("```\n " + message.author.username + " has requested \"" + input + "\" in ASCII from! \n" + ascii + "```");
+            }
+        });
+    }
 	if (message.content.startsWith(prefix1 + "halo4")) {
 		message.channel.sendMessage(" Mayday, mayday. This is UNSC FFG-201 Forward Unto Dawn, requesting immediate evac. Survivors aboard.")
 	}
