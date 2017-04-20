@@ -620,7 +620,7 @@ bot.on("message", function(message) {
             }
         }
 	    
-	if (msg.content == "!server") {
+	if (message.content == prefix + "server") {
         message.delete(1000);
         if (message.guild.available = true) {
             console.log("Nice Meme")
