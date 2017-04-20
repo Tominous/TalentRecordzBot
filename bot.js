@@ -884,7 +884,8 @@ bot.on("message", function(message) {
         message.channel.sendMessage("Donate  HERE! show some LOVE <3 https://streamjar.tv/tip/chisdealhd")
     }
 
-message.delete(1000)
+if (message.content.startsWith(prefix+"beam ")) {
+        message.delete(1000)
         var beam = message.content.replace(prefix+"beam ", "")
         var request = require("request"); //the var to request details on the streamer
         request("https://beam.pro/api/v1/channels/" + beam, function(error, response, body) { //set info for the streamer in JSON
