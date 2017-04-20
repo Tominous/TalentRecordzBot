@@ -888,33 +888,32 @@ bot.on("message", function(message) {
 if (message.content.startsWith(prefix+"beam ")) {
         message.delete(1000)
         var beam = message.content.replace(prefix+"beam ", "")
-        var request = require("request"); //the var to request details on the streamer
         request("https://beam.pro/api/v1/channels/" + beam, function(error, response, body) { //set info for the streamer in JSON
             if (!error && response.statusCode == 200) { //if there is no error checking
                 var beamInfo = JSON.parse(body); //setting a var for the JSON info
                 const beamStuff = new Discord.RichEmbed()
                     .setColor(embedColor)
                     .setTitle(beamInfo.token)
-                    .setFooter(bot.user.avatarURL)
+                    .setFooter("TalentRecordz", "https://cdn.discordapp.com/attachments/263639645647142912/264362236913516545/vaavassvasv_copy.png")
                     .setTimestamp()
                     .setThumbnail(beamInfo.user.avatarUrl)
                     .setURL("http://beam.pro/" + beam)
                     .addField("Online", beamInfo.online, true)
-					.addField("Title", beamInfo.name, true)
+		    .addField("Title", beamInfo.name, true)
                     .addField("Followers", beamInfo.numFollowers, true)
                     .addField("Beam Level", beamInfo.user.level, true)
-					.addField("Watching", beamInfo.viewersCurrent, true)
+		    .addField("Watching", beamInfo.viewersCurrent, true)
                     .addField("Total Views", beamInfo.viewersTotal, true)
                     .addField("Joined Beam", beamInfo.createdAt, true)
                     .addField("Audience", beamInfo.audience, true)
                     .addField("Partnered", beamInfo.partnered, true)
-					.addField("Player.me", beamInfo.user.social.player, true)
-					.addField("Youtube", beamInfo.user.social.youtube, true)
-					.addField("Twitter", beamInfo.user.social.twitter, true)
-					.addField("Facebook", beamInfo.user.social.facebook, true)
-					.addField("Instagram", beamInfo.user.social.instagram, true)
-					.addField("Steam", beamInfo.user.social.steam, true)
-					.addField("Discord", beamInfo.user.social.discord, true)
+		    .addField("Player.me", beamInfo.user.social.player, true)
+		    .addField("Youtube", beamInfo.user.social.youtube, true)
+		    .addField("Twitter", beamInfo.user.social.twitter, true)
+		    .addField("Facebook", beamInfo.user.social.facebook, true)
+		    .addField("Instagram", beamInfo.user.social.instagram, true)
+		    .addField("Steam", beamInfo.user.social.steam, true)
+		    .addField("Discord", beamInfo.user.social.discord, true)
                 message.channel.sendEmbed(beamStuff)
             }
             else{
