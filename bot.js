@@ -47,6 +47,7 @@ const ubl = require("./data/blusers.json")
 const fs = require("fs")
 const warns = require("./data/warns.json")
 const queues = {}
+const embedColor = 0x9900FF;
 const ytdl = require('ytdl-core')
 const search = require('youtube-search')
 const prefix1 = "hey talent, ";
