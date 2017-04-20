@@ -619,7 +619,36 @@ bot.on("message", function(message) {
                 }, 2000)
             }
         }
-
+	    
+	if (msg.content == "!server") {
+        message.delete(1000);
+        if (message.guild.available = true) {
+            console.log("Nice Meme")
+            if (message.guild.iconURL = null) {
+                var iconURL = "https://newagesoldier.com/wp-content/uploads/2016/12/masbot.png";
+            } else {
+                var iconURL = message.guild.iconURL;
+            }
+            const serverEmbed = new Discord.RichEmbed()
+                .setTitle(message.guild.name)
+                .setColor(embedColor)
+                .setFooter("Sent via M8 Bot", "https://cdn.discordapp.com/app-icons/278362996349075456/ce8868a4a1ccbe2f3f746d864f61a206.jpg")
+                .setThumbnail(iconURL)
+                .setTimestamp()
+                .addField("Server ID", message.guild.id, true)
+                .addField("Region", message.guild.region, true)
+                .addField("Owner", message.guild.owner, true)
+                .addField("Members", message.guild.memberCount, true)
+                .addField("Roles", message.guild.roles.size, true)
+                .addField("Channels", message.guild.channels.size, true)
+                .addField("Created At", message.guild.createdAt)
+                .addField("Joined Server At", message.guild.joinedAt)
+            message.channel.sendEmbed(serverEmbed);
+            //msg.channel.sendMessage();
+        } else {
+            message.reply
+        }
+    }
         if (message.content.startsWith(prefix + 'warn')) {
             if (message.channel.permissionsFor(message.author).hasPermission("KICK_MEMBERS") || message.channel.permissionsFor(message.author).hasPermission("BAN_MEMBERS")) {
                 let c = message.content
