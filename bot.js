@@ -884,116 +884,42 @@ bot.on("message", function(message) {
         message.channel.sendMessage("Donate  HERE! show some LOVE <3 https://streamjar.tv/tip/chisdealhd")
     }
 
-	if (message.content.startsWith(prefix + 'beam')) {
-	  var suffix1 = message.content.split(" ").slice(1).join(" ");
-	  if(suffix1 == "" || suffix1 == null) return message.channel.sendMessage("Do " + prefix + "beamstats <username?> for Beam User Status!");
-    request("https://beam.pro/api/v1/channels/"+suffix1,
-    function(err,res,body){
-              var data1 = JSON.parse(body);
-
-              //if there is an error
-              if(typeof data1.error !== "undefined") {
-                if(data1.statusCode == 404) {
-                  return message.channel.sendMessage(data1.message)
-                }else {
-                  return message.channel.sendMessage("An error occurred please consult the manual.")
-                  console.warn("An error occurred whilst looking up channel, printing json response:")
-                  console.warn(data1)
-                }
-              }
-
-              if(data1.online){
-                  message.channel.sendMessage("", {embed: {
-                    color: 0xd44a43,
-                    author: {
-                      name: suffix1,
-                      icon_url: data1.user.avatarUrl
-                    },
-                    title: 'Beam.pro',
-                    url: 'https://beam.pro/' + suffix1 + '/',
-                    description: suffix1 + ' Beam Channel',
-                    fields: [
-                      {
-                        name: 'Followers:',
-                        value: data1.numFollowers
-                      },
-                  	{
-                        name: 'Title:',
-                        value: data1.name
-                      },
-                  	{
-                        name: 'Live viewers:',
-                        value: data1.viewersCurrent
-                      },
-                  	{
-                        name: 'Total Viewers:',
-                        value: data1.viewersTotal
-                      },
-                  	{
-                        name: 'Level:',
-                        value: data1.user.level
-                      },
-                  	{
-                        name: 'Sparks:',
-                        value: data1.user.sparks
-                      },
-                  	{
-                        name: 'AGE Rate:',
-                        value: data1.audience
-                      },
-                  	{
-                        name: ' Partnered',
-                  	  value: data1.partnered
-                      },
-                      {
-                        name: ' Facebook',
-                  	  value: ' [Facebook](' + data1.user.social.facebook + ').'
-                      },
-                  	{
-                        name: ' Twitter',
-                  	  value: ' [Twitter](' + data1.user.social.twitter + ').'
-                      },
-                  	{
-                        name: ' YouTube',
-                  	  value: ' [Youtube](' + data1.user.social.youtube + ').'
-                      },
-                  	{
-                        name: ' Player.me',
-                  	  value: ' [Player.me](' + data1.user.social.player + ').'
-                      }
-                      ],
-                        timestamp: new Date(),
-                    footer: {
-                      icon_url: bot.user.avatarURL,
-                      text: '© ' + bot.user.username
-                    }
-                  }});
-                    }else{
-                                  message.channel.sendMessage("", {embed: {
-                    color: 0xe1ddda,
-                    author: {
-                      name: suffix1,
-                      icon_url: data1.user.avatarUrl
-                    },
-                    title: 'Beam.pro',
-                    url: 'https://beam.pro/' + suffix1 + '/',
-                    description: suffix1 + ' Beam Channel',
-                    fields: [
-                      {
-                        name: 'Streaming:',
-                        value: suffix1 + ' is OFFLINE! </3 :('
-                      }
-                      ],
-                        timestamp: new Date(),
-                    footer: {
-                      icon_url: bot.user.avatarURL,
-                      text: '© ' + bot.user.username
-                    }
-                  }});
-                    }
-                    });
-  }
-
+message.delete(1000)
+        var beam = message.content.replace(prefix+"beam ", "")
+        var request = require("request"); //the var to request details on the streamer
+        request("https://beam.pro/api/v1/channels/" + beam, function(error, response, body) { //set info for the streamer in JSON
+            if (!error && response.statusCode == 200) { //if there is no error checking
+                var beamInfo = JSON.parse(body); //setting a var for the JSON info
+                const beamStuff = new Discord.RichEmbed()
+                    .setColor(embedColor)
+                    .setTitle(beamInfo.token)
+                    .setFooter(bot.user.avatarURL)
+                    .setTimestamp()
+                    .setThumbnail(beamInfo.user.avatarUrl)
+                    .setURL("http://beam.pro/" + beam)
+                    .addField("Online", beamInfo.online, true)
+					.addField("Title", beamInfo.name, true)
+                    .addField("Followers", beamInfo.numFollowers, true)
+                    .addField("Beam Level", beamInfo.user.level, true)
+					.addField("Watching", beamInfo.viewersCurrent, true)
+                    .addField("Total Views", beamInfo.viewersTotal, true)
+                    .addField("Joined Beam", beamInfo.createdAt, true)
+                    .addField("Audience", beamInfo.audience, true)
+                    .addField("Partnered", beamInfo.partnered, true)
+					.addField("Player.me", beamInfo.user.social.player, true)
+					.addField("Youtube", beamInfo.user.social.youtube, true)
+					.addField("Twitter", beamInfo.user.social.twitter, true)
+					.addField("Facebook", beamInfo.user.social.facebook, true)
+					.addField("Instagram", beamInfo.user.social.instagram, true)
+					.addField("Steam", beamInfo.user.social.steam, true)
+					.addField("Discord", beamInfo.user.social.discord, true)
+                message.channel.sendEmbed(beamStuff)
+            }
+            else{
+                message.reply("error finding that streamer, are you sure that was the correct name?")
+            }
+        });
+    }
 
 	if (message.content.startsWith(prefix + 'MCserverchecker')) {
 	  var suffix = message.content.split(" ").slice(1).join(" ");
