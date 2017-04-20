@@ -1074,7 +1074,7 @@ if (message.content.startsWith(prefix+"beam ")) {
     }
 	if (message.content == prefix+"serverlist") {
         message.delete(1000)
-        var listraw = client.guilds.map(g => g.name).toString()
+        var listraw = bot.guilds.map(g => g.name).toString()
         var list = listraw.replace(",", ", ")
         message.channel.sendMessage("Current list of servers I am on **" + list + "**")
     }
