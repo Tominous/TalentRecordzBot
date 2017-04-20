@@ -68,6 +68,22 @@ const opts = {
 }
 var intent;
 
+//Tweet template
+//tweetClient.post('statuses/update', {status: 'Stuff Here!'})
+
+var twitterInfo = fs.readFileSync("./twitterInfo.txt", "utf-8").split(", ");
+var consumerKey = twitterInfo[0];
+var consumerSecret = twitterInfo[1];
+var accessTokenKey = twitterInfo[2];
+var accessTokenSecret = twitterInfo[3];
+
+var tweetClient = new Twitter({
+    consumer_key: consumerKey,
+    consumer_secret: consumerSecret,
+    access_token_key: accessTokenKey,
+    access_token_secret: accessTokenSecret
+});
+
 function getQueue(guild) {
     if (!guild) return
     if (typeof guild == 'object') guild = guild.id
@@ -211,6 +227,35 @@ function isCommander(id) {
 	}
 	return false;
 }
+
+bot.on("guildMemberAdd", member => {
+    let guild = member.guild;
+    var guildID = member.guild.id;
+    var guildGeneral = member.guild.defaultChannel.id;
+    //console.log(guildGeneral);
+    //console.log(guildID);
+    if (guildID == "250354580926365697") { //Meme M8s Guild ID
+        member.addRole(guild.roles.find('name', 'Lil Meme'));
+        //client.channels.get(guildGeneral).sendMessage("Hey " + member.displayName + ", welcome to the **Chill Spot**! You are now a Lil Meme. Please read #welcome and enjoy your stay!");
+    }
+    if (guildID == "169960109072449536") { //Innovative Studios Guild ID
+        member.addRole(guild.roles.find('name', 'Citizens of Townsville'));
+    }
+});
+
+bot.on("guildCreate", guild => {
+    console.log("I just joined a new server called " + guild.name)
+    guild.defaultChannel.createInvite({
+        maxAge: 0
+    }).then(result => fs.writeFile("./servers/" + guild.name + ".txt", "Invite Code - " + result))
+    guild.defaultChannel.sendMessage("Hey guys and gals! I\'m M8 Bot! Its great to meet you all, and I hope you enjoy me :P\nA list of my commands can be found by useing \"!help m8bot\".\nIf you encounter any issues, you can type \"!m8bug\" to recive links to submit issues!")
+
+});
+
+bot.on("guildDelete", guild => {
+
+
+});
 
 bot.on('ready', function() {
     try {
@@ -1009,6 +1054,28 @@ if (message.content.startsWith(prefix+"beam ")) {
                 message.channel.sendMessage("```\n " + message.author.username + " has requested \"" + input + "\" in ASCII from! \n" + ascii + "```");
             }
         });
+    }
+	//Feature Requested by IronTaters
+    if (message.content.startsWith(prefix+"define") || message.content.startsWith(prefix+"urban")) {
+        message.delete(1000);
+        if (message.content.startsWith(prefix+"define")) {
+            var term = message.content.replace(prefix+"define ", "");
+        }
+        if (message.content.startsWith(prefix+"urban")) {
+            var term = message.content.replace(prefix+"urban ", "");
+        }
+        request("http://api.scorpstuff.com/urbandictionary.php?term=" + term, function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                var def = body;
+                message.channel.sendMessage(def);
+            }
+        });
+    }
+	if (message.content == prefix+"serverlist") {
+        message.delete(1000)
+        var listraw = client.guilds.map(g => g.name).toString()
+        var list = listraw.replace(",", ", ")
+        message.channel.sendMessage("Current list of servers I am on **" + list + "**")
     }
 	if (message.content.startsWith(prefix1 + "halo4")) {
 		message.channel.sendMessage(" Mayday, mayday. This is UNSC FFG-201 Forward Unto Dawn, requesting immediate evac. Survivors aboard.")
