@@ -794,7 +794,7 @@ bot.on("message", function(message) {
         }
 
         if (message.content.startsWith(prefix + 'invite')) {
-            message.channel.sendMessage("My OAuth URL: " + `http://discordapp.com/oauth2/authorize?client_id=${config.client_id}&scope=bot`)
+            message.channel.sendMessage("My OAuth URL: " + `: https://discordapp.com/oauth2/authorize?permissions=1341643849&scope=bot&client_id=${config.client_id}`)
         }
         if (message.content.startsWith(prefix + 'git')) {
             message.channel.sendMessage("GitHub URL: **https://github.com/ChisdealHD/TalentRecordzBot**")
