@@ -1019,7 +1019,7 @@ if (message.content.startsWith(prefix+"beam ")) {
 	    if (message.content.startsWith(prefix + 'arkserverchecker')) {
 	  var suffix = message.content.split(" ").slice(1).join(" ");
 	   if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "arkserverchecker <IP:PORT> for Checking Server is Online for Ark Survival Evolved!");
-    request("http://arkservers.net/api/query/"+suffix
+    request("http://arkservers.net/api/query/"+suffix,
     function(err,res,body){
               var data = JSON.parse(body);
               if(data.info){
