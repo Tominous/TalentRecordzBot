@@ -1005,12 +1005,32 @@ if (message.content.startsWith(prefix+"beam ")) {
               var data = JSON.parse(body);
               if(data.online){
                   message.channel.sendMessage(suffix
-                      +" is Active "
-                      +"\n ICON: "+data.favicon
-                      +"\n Online Players: "+data.players.online
-					  +"\n Max Players: "+data.players.max
-					  +"\n Online: "+data.online
-					  +"\n Version: "+data.version.name)
+			+" is Active "
+			+"\n ICON: "+data.favicon
+			+"\n Online Players: "+data.players.online
+			+"\n Max Players: "+data.players.max
+			+"\n Online: "+data.online
+			+"\n Version: "+data.version.name)
+              }else{
+                message.channel.sendMessage(suffix+" is offline")
+            }
+        });
+    }
+	    if (message.content.startsWith(prefix + 'arkserverchecker')) {
+	  var suffix = message.content.split(" ").slice(1).join(" ");
+	   if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + prefix + "arkserverchecker <IP:PORT> for Checking Server is Online for Ark Survival Evolved!");
+    request("http://arkservers.net/api/query/"+suffix+,
+    function(err,res,body){
+              var data = JSON.parse(body);
+              if(data.info){
+                  message.channel.sendMessage(suffix
+                     	+" is Active "
+                 	+"\n Name: "+data.info.HostName
+                     	+"\n Online Players: "+data.info.Players
+			+"\n Max Players: "+data.info.MaxPlayers
+			+"\n Map: "+data.info.Map
+			+"\n Players: "+data.players.Name
+			+"\n Time Played: "+data.players.TimeF)
               }else{
                 message.channel.sendMessage(suffix+" is offline")
             }
