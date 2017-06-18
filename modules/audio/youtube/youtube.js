@@ -1,4 +1,4 @@
-﻿const request = require('request')
+const request = require('request')
 const Discord = require("discord.js");
 const config = require('../../../config.json');
 const ytdl = require('ytdl-core')
@@ -48,33 +48,6 @@ module.exports = (bot) => {
    //         play(msg, queue, url)
    //    });
    // }
-
-bot.client.on('voiceStateUpdate', function(oldMember, newMember) {
-	var svr = bot.client.guilds.array()
-    for (var i = 0; i < svr.length; i++) {
-        if (svr[i].voiceConnection) {
-            if (paused[svr[i].voiceConnection.channel.id]) {
-                if (svr[i].voiceConnection.channel.members.size > 1) {
-                    //svr[i].defaultChannel.sendMessage("I resumed my music in " + svr[i].voiceConnection.channel.name)
-					paused[svr[i].voiceConnection.channel.id].player.resume()
-					var game = bot.client.user.presence.game.name;
-                    delete paused[svr[i].voiceConnection.channel.id]
-                    game = game.split("⏸")[1];
-					bot.client.user.setGame(+game,'https://twitch.tv/'+twitchusername);
-                }
-            }
-            if (svr[i].voiceConnection.channel.members.size === 1 && !svr[i].voiceConnection.player.dispatcher.paused) {
-                //svr[i].defaultChannel.sendMessage("I paused my music in the voice channel because no one is there, rejoin the channel to resume music")
-                svr[i].voiceConnection.player.dispatcher.pause();
-                var game = bot.client.user.presence.game.name;
-                paused[svr[i].voiceConnection.channel.id] = {
-                    "player": svr[i].voiceConnection.player.dispatcher
-                }
-                bot.client.user.setGame("⏸ " + game,'https://twitch.tv/'+twitchusername);
-            }
-        }
-    }
-});
     function play(msg, queue, song) {
         try {
             if (!msg || !queue) return;
@@ -140,7 +113,7 @@ bot.client.on('voiceStateUpdate', function(oldMember, newMember) {
                 "error": err,
                 "stack": err.stack
             }
-            fs.writeFile("../data/errors.json", JSON.stringify(errorlog), function(err) {
+            fs.writeFile("../../../data/errors.json", JSON.stringify(errorlog), function(err) {
                 if (err) return console.log("Even worse we couldn't write to our error log file! Make sure data/errors.json still exists!");
             })
 

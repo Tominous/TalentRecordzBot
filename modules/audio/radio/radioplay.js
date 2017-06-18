@@ -7,7 +7,7 @@ const connections = []
 
 
 var options = {
-  url: "http://hexcraft.pro:8004/;?type=http&nocache=706",
+  url: "http://hexcraft.pro:8004/;?type=http&nocache=750",
   headers: {
     'User-Agent': 'TalentRecordsBot'
   }
