@@ -29,41 +29,26 @@ console.log("BOT IS STARTING UP!")
 
 //console.log(msg)
 
-
-bot.client.on("guildMemberAdd", member => {
-    let guild = member.guild;
-    var guildID = member.guild.id;
-    var guildGeneral = member.guild.defaultChannel.id;
-    //console.log(guildGeneral);
-    //console.log(guildID);
-    if (guildID == "250354580926365697") { //Meme M8s Guild ID
-        member.addRole(guild.roles.find('name', 'Lil Meme'));
-        //client.channels.get(guildGeneral).sendMessage("Hey " + member.displayName + ", welcome to the **Chill Spot**! You are now a Lil Meme. Please read #welcome and enjoy your stay!");
-    }
-    if (guildID == "169960109072449536") { //Innovative Studios Guild ID
-        member.addRole(guild.roles.find('name', 'Citizens of Townsville'));
-    }
-});
-
-bot.client.on("guildCreate", guild => {
-    console.log("I just joined a new server called " + guild.name)
-    guild.defaultChannel.createInvite({
-        maxAge: 0
-    }).then(result => fs.writeFile("./servers/" + guild.name + ".txt", "Invite Code - " + result))
-    guild.defaultChannel.sendMessage("Hey guys and gals! I\'m M8 Bot! Its great to meet you all, and I hope you enjoy me :P\nA list of my commands can be found by useing \"!help m8bot\".\nIf you encounter any issues, you can type \"!m8bug\" to recive links to submit issues!")
-
-});
-
-bot.client.on("guildDelete", guild => {
-
-
-});
-
 bot.setPrefix(config.prefix)
 
-//bot.registerModule(require('./modules/stream/mixer'));
+bot.registerModule(require('./modules/stream/mixer'));
+bot.registerModule(require('./modules/stream/twitch'));
+bot.registerModule(require('./modules/emotes/mixer'));
+bot.registerModule(require('./modules/emotes/twitch'));
 bot.registerModule(require('./modules/admin/eval'));
-//bot.registerModule(require('./modules/radioplay'));
+bot.registerModule(require('./modules/commands/dmowner'));
+bot.registerModule(require('./modules/commands/servers'));
+bot.registerModule(require('./modules/commands/server'));
+bot.registerModule(require('./modules/commands/8ball'));
+bot.registerModule(require('./modules/commands/beammeup'));
+bot.registerModule(require('./modules/commands/google'));
+bot.registerModule(require('./modules/commands/invite'));
+bot.registerModule(require('./modules/commands/ping'));
+bot.registerModule(require('./modules/commands/specs'));
+bot.registerModule(require('./modules/commands/about'));
+bot.registerModule(require('./modules/commands/sub'));
+bot.registerModule(require('./modules/commands/git'));
+bot.registerModule(require('./modules/commands/whatsmyname'));
 bot.registerModule(require('./modules/commands/help'));
 bot.registerModule(require('./modules/audio/radio/radiostats'));
 bot.registerModule(require('./modules/audio/radio/radioplay'));
