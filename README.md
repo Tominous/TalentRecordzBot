@@ -9,7 +9,7 @@ DiscordJS Discord Bot made by ChisdealHD
 
 This bot Pre-Configure by Chisdealhd & Bacon_Space, so not only musicbot got few client stuff too.
 
-This Musicbot will require: Node.js, Git, discord.js, FFMPEG, ytdl-core, mathjs, Python 2.7 (optional), youtube-search, express, cheerio, request, node-opus, stringformat, morgan, markdown
+This Musicbot will require: Node.js, Git, discord.js, FFMPEG, ytdl-core, Python 2.7 (optional), youtube-search, request, node-opus, stringformat, morgan, markdown
 
 To make bot work.
 
@@ -17,7 +17,7 @@ Linux
 Make new folder ```mkdir name```
 go inside folder ```cd name```
 do this command ```git clone https://github.com/ChisdealHD/TalentRecordzBot.git```
-download this files and extract it and put 2 .exe inside bot ```http://talentrecordz.uk.to/downloads/ffmpeg.zip```
+download this files and extract it and put 2 .exe inside bot ```https://mega.nz/#!VNVQhRjZ!v-iePS8RKw3OX2PfMBwWHtczh43Wj9Lf_zHMhRPpmpQ```
 then folder be TalentRecordzBot-master so do "cd TalentRecordzBot-master" = if folder not called that do "ls" see whats called.
 ```Javascript
 then "npm Install"
@@ -30,6 +30,6 @@ then do "C+X and Y and Enter"
 after that then "node bot.js" and bam your finished
 ```
 
-i dont really know if  works as windows computers but give a try still.
+it works with windows aswell, make sure compacable Version of NodeJS and always need Latest NodeJS.
 
 This bot in BETA so there will be few bugs round, if theres bugs report to me at Issues
