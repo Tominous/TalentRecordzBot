@@ -25,7 +25,7 @@ function getRandomInt(min, max) {
 					return
 				}
 
-		        bot.setGame('Nowplaying: '+data.streams[0].songtitle,'https://twitch.tv/chisdealhd')
+		        bot.setGame('Nowplaying: '+data.streams[0].songtitle+ ' Servers: '+bot.client.guilds.size)
 			}
 		)
 	}
@@ -60,7 +60,7 @@ function getRandomInt(min, max) {
 		embed.addField("Listeners: ", listeners)
 		embed.setThumbnail("http://hexcraft.pro:8004/playingart?sid=1&"+ getRandomInt(0, 999999))
 		embed.setFooter('TalentRecordz')
-		embed.setURL('https://github.com/TortleWortle/DuckRecords-Discord-bot')
+		embed.setURL('https://github.com/ChisdealHD/TalentRecordzBot')
 
 		message.channel.send({embed})
 	})

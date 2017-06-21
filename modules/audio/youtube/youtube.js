@@ -34,20 +34,6 @@ module.exports = (bot) => {
     return Math.floor(Math.random() * (max + 1));
 	}
 
-   //Fix dis shit its BROKEN for STOP command!
-   // function getRandomMusic(queue, msg) {
-   //     fs.readFile('./modules/audio/youtube/autoplaylist.txt', 'utf8', function(err, data) {
-   //         if (err) throw err;
-   //         console.log('OK: autoplaylist.txt');
-   //         var random = data.split('\n');
-   //
-   //         var num = getRandomInt(random.length);
-   //         console.log(random[num])
-   //         var url = random[num];
-   //         msg.author.username = "AUTOPLAYLIST";
-   //         play(msg, queue, url)
-   //    });
-   // }
     function play(msg, queue, song) {
         try {
             if (!msg || !queue) return;
@@ -101,8 +87,6 @@ module.exports = (bot) => {
 
 
                 //TODO: When no more music, play randomly from playlist
-
-                //getRandomMusic(queue, msg);
 
 
             }
@@ -171,14 +155,10 @@ module.exports = (bot) => {
 	bot.addTraditionalCommand('ytpause', message => {
 			message.delete(1000)
 
-			if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
                 let player = message.guild.voiceConnection.player.dispatcher
                 if (typeof player == 'undefined' || player.paused) return message.channel.sendMessage("Bot is not playing")
                 player.pause();
                 message.channel.sendMessage("Pausing music...");
-            } else {
-                message.channel.sendMessage('Only admins can use this command!');
-			}
 	})
 
 	bot.addTraditionalCommand('ytqueue', message => {
@@ -204,7 +184,6 @@ module.exports = (bot) => {
 	bot.addTraditionalCommand('ytresume', message => {
 			message.delete(1000)
 
-			if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
                 let player = message.guild.voiceConnection.player.dispatcher
                 if (!player) return message.channel.sendMessage('No music is playing at this time.');
                 if (player.playing) return message.channel.sendMessage('The music is already playing');
@@ -212,37 +191,25 @@ module.exports = (bot) => {
                 bot.client.user.setGame(queue[0].title);
                 player.resume();
                 message.channel.sendMessage("Resuming music...");
-            } else {
-                message.channel.sendMessage('Only admins can do this command');
-			}
 	})
 
 	bot.addTraditionalCommand('ytskip', message => {
 			message.delete(1000)
-
-			if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1 || message.channel.permissionsFor(message.member).hasPermission('MANAGE_SERVER')) {
                 let player = message.guild.voiceConnection.player.dispatcher
                 if (!player || player.paused) return message.channel.sendMessage("Bot is not playing!")
                 message.channel.sendMessage('Skipping song...');
                 player.end()
-            } else {
-                message.channel.sendMessage('Only the admins can do this command');
-			}
 	})
 
 	bot.addTraditionalCommand('ytclear', message => {
 			message.delete(1000)
 
-			if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1 || message.channel.permissionsFor(message.member).hasPermission('MANAGE_SERVER')) {
                 let queue = getQueue(message.guild.id);
                 if (queue.length == 0) return message.channel.sendMessage(`No music in queue`);
                 for (var i = queue.length - 1; i >= 0; i--) {
                     queue.splice(i, 1);
                 }
                 message.channel.sendMessage(`Cleared the queue`)
-            } else {
-                message.channel.sendMessage('Only the admins can do this command');
-			}
 	})
 
 
@@ -255,13 +222,12 @@ module.exports = (bot) => {
             if (!suffix) {
                 message.channel.sendMessage(`The current volume is ${(player.volume * 100)}`);
             } else if (message.guild.owner.id == message.author.id || message.author.id == config.owner_id || config.admins.indexOf(message.author.id) != -1) {
-                let volumeBefore = player.volume
                 let volume = parseInt(suffix);
                 if (volume > 100) return message.channel.sendMessage("The music can't be higher then 100");
                 player.setVolume((volume / 100));
                 message.channel.sendMessage(`Volume changed from ${(volumeBefore * 100)} to ${volume}`);
             } else {
-				message.channel.sendMessage('Only admins can change the volume!');
+				message.channel.sendMessage('Only admins can change the volume! with MANAGE_SERVER Permissions');
 			}
 	})
 }

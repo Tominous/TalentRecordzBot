@@ -6,9 +6,9 @@ const TortleBot = require('tortlebot-core')
 const Discord = require("discord.js");
 const config = require('./config.json');
 const client = new Discord.Client({ autoReconnect: true });
-const errorlog = require("./data/errors.json")
 const fs = require("fs")
 const rb = "```"
+const request = require("request");
 
 client.login(config.token)
 
@@ -29,6 +29,7 @@ console.log("BOT IS STARTING UP!")
 
 //console.log(msg)
 
+
 bot.setPrefix(config.prefix)
 
 bot.registerModule(require('./modules/stream/mixer'));
@@ -36,6 +37,7 @@ bot.registerModule(require('./modules/stream/twitch'));
 bot.registerModule(require('./modules/emotes/mixer'));
 bot.registerModule(require('./modules/emotes/twitch'));
 bot.registerModule(require('./modules/admin/eval'));
+//bot.registerModule(require('./modules/admin/api'));
 bot.registerModule(require('./modules/commands/dmowner'));
 bot.registerModule(require('./modules/commands/servers'));
 bot.registerModule(require('./modules/commands/server'));
@@ -48,6 +50,7 @@ bot.registerModule(require('./modules/commands/specs'));
 bot.registerModule(require('./modules/commands/about'));
 bot.registerModule(require('./modules/commands/sub'));
 bot.registerModule(require('./modules/commands/git'));
+//bot.registerModule(require('./modules/commands/chisbday'));
 bot.registerModule(require('./modules/commands/whatsmyname'));
 bot.registerModule(require('./modules/commands/help'));
 bot.registerModule(require('./modules/audio/radio/radiostats'));
