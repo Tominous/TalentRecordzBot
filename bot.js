@@ -30,6 +30,7 @@ console.log("BOT IS STARTING UP!")
 //console.log(msg)
 
 
+
 bot.setPrefix(config.prefix)
 
 bot.registerModule(require('./modules/stream/mixer'));
@@ -37,7 +38,10 @@ bot.registerModule(require('./modules/stream/twitch'));
 bot.registerModule(require('./modules/emotes/mixer'));
 bot.registerModule(require('./modules/emotes/twitch'));
 bot.registerModule(require('./modules/admin/eval'));
-//bot.registerModule(require('./modules/admin/api'));
+bot.registerModule(require('./modules/admin/shutdown'));
+bot.registerModule(require('./modules/admin/web'));
+bot.registerModule(require('./modules/admin/api'));
+//bot.registerModule(require('./modules/admin/mysql'));
 bot.registerModule(require('./modules/commands/dmowner'));
 bot.registerModule(require('./modules/commands/servers'));
 bot.registerModule(require('./modules/commands/server'));
@@ -53,8 +57,9 @@ bot.registerModule(require('./modules/commands/git'));
 //bot.registerModule(require('./modules/commands/chisbday'));
 bot.registerModule(require('./modules/commands/whatsmyname'));
 bot.registerModule(require('./modules/commands/help'));
-bot.registerModule(require('./modules/audio/radio/radiostats'));
-bot.registerModule(require('./modules/audio/radio/radioplay'));
+//bot.registerModule(require('./modules/audio/radio/radiostats'));
+//bot.registerModule(require('./modules/audio/radio/radioplay'));
 bot.registerModule(require('./modules/audio/youtube/youtube'));
+bot.registerModule(require('./modules/commands/videoyt'));
 
 process.on('unhandledRejection', console.error);
