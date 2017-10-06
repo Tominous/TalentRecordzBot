@@ -130,10 +130,9 @@ module.exports = (bot) => {
         }
     });
 
-	bot.addTraditionalCommand('ytplay', message => {
-			message.delete(1000)
-
-			if (!message.guild.voiceConnection) {
+	bot.addCommand('ytplay', (payload) => {
+		var message = payload.message
+		if (!message.guild.voiceConnection) {
                 if (!message.member.voiceChannel) return message.channel.sendMessage('You need to be in a voice channel')
                 var chan = message.member.voiceChannel
                 chan.join()
@@ -145,26 +144,24 @@ module.exports = (bot) => {
         //Empty func?
 	})
 
- 	bot.addTraditionalCommand('ytstop', message => {
-        message.delete(1000)
+ 	bot.addCommand('ytstop', (payload) => {
+        var message = payload.message
         message.guild.voiceConnection.disconnect()
         message.channel.sendMessage(':wave: : no music then :( well im all alone!')
     })
 
 
-	bot.addTraditionalCommand('ytpause', message => {
-			message.delete(1000)
-
+	bot.addCommand('ytpause', (payload) => {
+		var message = payload.message
                 let player = message.guild.voiceConnection.player.dispatcher
                 if (typeof player == 'undefined' || player.paused) return message.channel.sendMessage("Bot is not playing")
                 player.pause();
                 message.channel.sendMessage("Pausing music...");
 	})
 
-	bot.addTraditionalCommand('ytqueue', message => {
-			message.delete(1000)
-
-			let queue = getQueue(message.guild.id);
+	bot.addCommand('ytqueue', (payload) => {
+		var message = payload.message
+		let queue = getQueue(message.guild.id);
             if (queue.length == 0) return message.channel.sendMessage("No music in queue");
             let text = '';
             for (let i = 0; i < queue.length; i++) {
@@ -173,17 +170,16 @@ module.exports = (bot) => {
             message.channel.sendMessage(`${rb}xl\n${text}${rb}`);
 	})
 
-	bot.addTraditionalCommand('ytnp', message => {
-			message.delete(1000)
+	bot.addCommand('ytnp', (payload) => {
+		var message = payload.message
 
-			let queue = getQueue(message.guild.id);
+		let queue = getQueue(message.guild.id);
             if (queue.length == 0) return message.channel.sendMessage(message, "No music in queue");
             message.channel.sendMessage(`${rb}xl\nCurrently playing: ${queue[0].title} | by ${queue[0].requested}${rb}`);
 	})
 
-	bot.addTraditionalCommand('ytresume', message => {
-			message.delete(1000)
-
+	bot.addCommand('ytresume', (payload) => {
+		var message = payload.message
                 let player = message.guild.voiceConnection.player.dispatcher
                 if (!player) return message.channel.sendMessage('No music is playing at this time.');
                 if (player.playing) return message.channel.sendMessage('The music is already playing');
@@ -193,17 +189,16 @@ module.exports = (bot) => {
                 message.channel.sendMessage("Resuming music...");
 	})
 
-	bot.addTraditionalCommand('ytskip', message => {
-			message.delete(1000)
+	bot.addCommand('ytskip', (payload) => {
+		var message = payload.message
                 let player = message.guild.voiceConnection.player.dispatcher
                 if (!player || player.paused) return message.channel.sendMessage("Bot is not playing!")
                 message.channel.sendMessage('Skipping song...');
                 player.end()
 	})
 
-	bot.addTraditionalCommand('ytclear', message => {
-			message.delete(1000)
-
+	bot.addCommand('ytclear', (payload) => {
+		var message = payload.message
                 let queue = getQueue(message.guild.id);
                 if (queue.length == 0) return message.channel.sendMessage(`No music in queue`);
                 for (var i = queue.length - 1; i >= 0; i--) {
@@ -213,10 +208,10 @@ module.exports = (bot) => {
 	})
 
 
-	bot.addTraditionalCommand('ytvolume', message => {
-			message.delete(1000)
+	bot.addCommand('ytvolume', (payload) => {
+		var message = payload.message
 
-			let suffix = message.content.split(" ")[1];
+		let suffix = message.content.split(" ")[1];
             var player = message.guild.voiceConnection.player.dispatcher
             if (!player || player.paused) return message.channel.sendMessage('No music m8, queue something with `' + prefix + 'play`');
             if (!suffix) {
