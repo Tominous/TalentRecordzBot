@@ -1,4 +1,4 @@
-/**
+//**
  * Created by TortleWortle on 3/31/2017.
  */
 // This is an example bot
@@ -35,8 +35,8 @@ bot.setPrefix(config.prefix)
 
 bot.registerModule(require('./modules/stream/mixer'));
 bot.registerModule(require('./modules/stream/twitch'));
-bot.registerModule(require('./modules/emotes/mixer'));
-bot.registerModule(require('./modules/emotes/twitch'));
+//bot.registerModule(require('./modules/emotes/mixer'));
+//bot.registerModule(require('./modules/emotes/twitch'));
 bot.registerModule(require('./modules/admin/eval'));
 bot.registerModule(require('./modules/admin/shutdown'));
 bot.registerModule(require('./modules/admin/web'));
