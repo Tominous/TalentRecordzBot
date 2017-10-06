@@ -3,7 +3,7 @@ const config = require('../../config.json');
 const prefix = config.prefix;
 
 module.exports = (bot) => {
-	bot.addTraditionalCommand("hey talent 8ball ", (payload) => {
+	bot.addCommand("hey talent 8ball ", (payload) => {
 	var message = payload.message
         var suffix = message.content.split(" ").slice(1).join(" ");
       if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " + config.prefix + "hey talent 8ballhey talent 8ball <Question?> for your Awser!");
