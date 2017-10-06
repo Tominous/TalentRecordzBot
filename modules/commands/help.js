@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 const os = require('os')
 
 module.exports = (bot) => {
-	bot.addTraditionalCommand("help", message => {
-		message.delete(1000)
+	bot.addCommand("help", (payload) => {
+	var message = payload.message
         message.channel.sendMessage("", {embed: {
         color: 2590000,
         author: {
