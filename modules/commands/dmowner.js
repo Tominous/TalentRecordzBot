@@ -3,7 +3,7 @@ const config = require('../../config.json');
 const prefix = config.prefix;
 
 module.exports = (bot) => {
-	bot.addTraditionalCommand("dmowner ", (payload) => {
+	bot.addCommand("dmowner ", (payload) => {
 	var message = payload.message
         var suffix = message.content.split(" ").slice(1).join(" ");
         if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " +config.prefix+ "dmowner <Message?> to Message ChisdealHD Privately!");
