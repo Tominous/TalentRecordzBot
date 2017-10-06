@@ -8,7 +8,7 @@ const queues = {}
 const errorlog = require("../../../data/errors.json")
 const fs = require("fs")
 const twitchusername = config.twitchusername;
-const ytkey = config.youtube_api_key;
+const ytkey = config.youtube.youtube_api_key;
 const rb = "```"
 
 const opts = {
