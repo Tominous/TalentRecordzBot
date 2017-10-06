@@ -36,8 +36,8 @@ module.exports = (bot) => {
     }
 }
 
-	bot.addTraditionalCommand("ping", message => {
-		message.delete(1000)
+	bot.addCommand("ping", (payload) => {
+		var message = payload.message
             var before = Date.now()
             message.channel.sendMessage("Pong!").then(function(msg) {
             var after = Date.now()
