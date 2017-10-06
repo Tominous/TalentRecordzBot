@@ -5,8 +5,8 @@ const request = require('request')
 const ytkey = config.youtube_api_key;
 
 module.exports = (bot) => {
-	bot.addTraditionalCommand("sub ", message => {
-		message.delete(1000)
+	bot.addCommand("sub ", (payload) => {
+	var message = payload.message
         var id = message.content.split(" ").slice(1).join(" ");
         request("https://www.googleapis.com/youtube/v3/search?part=snippet&q="+id+"&key="+ytkey, function(err, resp, body) {
             try{
