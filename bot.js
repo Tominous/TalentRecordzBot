@@ -1,6 +1,4 @@
-//**
- * Created by TortleWortle on 3/31/2017.
- */
+//*** Created by TortleWortle on 3/31/2017.*//
 // This is an example bot
 const TortleBot = require('tortlebot-core')
 const Discord = require("discord.js");
