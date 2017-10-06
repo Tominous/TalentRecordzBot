@@ -17,7 +17,7 @@ function isCommander(id) {
 	return false;
 }
 
-	bot.addTraditionalCommand('shutdown', (payload) => {
+	bot.addCommand('shutdown', (payload) => {
 	var message = payload.message
 	if (message.author.id === config.owner_id || config.admins.indexOf(message.author.id) != -1) {
                 message.channel.sendMessage("**Shutdown has been initiated**.\nShutting down...")
