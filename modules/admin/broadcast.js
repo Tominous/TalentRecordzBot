@@ -17,8 +17,8 @@ function isCommander(id) {
 	return false;
 }
 
-	bot.addTraditionalCommand('broadcast', message => {
-	message.delete(1000)
+	bot.addCommand('broadcast', (payload) => {
+	var message = payload.message
 	if (isCommander(message.author.id)) {
             var mes = message.content.split(" ").slice(1).join(" ");
             for(var i=0; i<bot.client.guild.length; i++) {
