@@ -50,8 +50,8 @@ function isCommander(id) {
 	return false;
 }
 
-	bot.addTraditionalCommand('eval', message => {
-		message.delete(1000)
+	bot.addCommand('eval', (payload) => {
+		var message = payload.message
 		var user = message.author.username;
 		let embed = new Discord.RichEmbed();
 	if (isCommander(message.author.id)) {
