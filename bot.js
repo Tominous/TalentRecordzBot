@@ -58,6 +58,6 @@ bot.registerModule(require('./modules/commands/help'));
 //bot.registerModule(require('./modules/audio/radio/radiostats'));
 //bot.registerModule(require('./modules/audio/radio/radioplay'));
 bot.registerModule(require('./modules/audio/youtube/youtube'));
-bot.registerModule(require('./modules/commands/videoyt'));
+//bot.registerModule(require('./modules/commands/videoyt'));
 
 process.on('unhandledRejection', console.error);
