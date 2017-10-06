@@ -4,8 +4,8 @@ const prefix = config.prefix;
 const os = require('os')
 
 module.exports = (bot) => {
-	bot.addTraditionalCommand("specs", message => {
-		message.delete(1000)
+	bot.addCommand("specs", (payload) => {
+	var message = payload.message
         message.channel.sendMessage("", {embed: {
   color: 2590000,
   author: {
