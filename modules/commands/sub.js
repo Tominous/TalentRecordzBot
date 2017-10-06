@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require('../../config.json');
 const prefix = config.prefix;
 const request = require('request')
-const ytkey = config.youtube_api_key;
+const ytkey = config.youtube.youtube_api_key;
 
 module.exports = (bot) => {
 	bot.addCommand("sub ", (payload) => {
