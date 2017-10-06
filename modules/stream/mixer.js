@@ -4,8 +4,8 @@ const config = require('../../config.json');
 
 module.exports = (bot) => {
 
-	bot.addTraditionalCommand('mixer', message => {
-			message.delete(1000)
+	bot.addCommand('mixer', (payload) => {
+			var message = payload.message
 			var suffix = message.content.split(" ").slice(1).join(" ");
 			if(suffix == "" || suffix == null) return message.channel.send("Do "+config.prefix+"mixer username for Status for Mixer!");
 			request("https://mixer.com/api/v1/channels/" +suffix, function(error, response, body) { //set info for the streamer in JSON
