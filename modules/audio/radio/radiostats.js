@@ -35,8 +35,8 @@ function getRandomInt(min, max) {
 		setInterval(updateGame, 10 * 1000)
 	})
 
-	bot.addTraditionalCommand('radio np', message => {
-		message.delete(1000)
+	bot.addCommand('radio np',(payload) => {
+		var message = payload.message
 		let info = bot.get('radioinfo')
 
 		if(info.streams[0].bitrate == '0') {
