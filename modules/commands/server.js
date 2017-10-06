@@ -4,8 +4,8 @@ const prefix = config.prefix;
 const invite = `https://discordapp.com/oauth2/authorize?permissions=1341643849&scope=bot&client_id=${config.client_id}`;
 
 module.exports = (bot) => {
-	bot.addTraditionalCommand("server", message => {
-		message.delete(1000)
+	bot.addCommand("server", (payload) => {
+	var message = payload.message
         if (message.guild.available = true) {
             console.log("Server has been SCANNED at " + message.guild.name)
             if (message.guild.iconURL = null) {
