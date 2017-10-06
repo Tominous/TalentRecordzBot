@@ -5,8 +5,8 @@ const twitchkey = config.twitch_api_key;
 
 module.exports = (bot) => {
 
-	bot.addTraditionalCommand('twitch', message => {
-			message.delete(1000)
+	bot.addCommand('twitch', (payload) => {
+			var message = payload.message
 			var suffix = message.content.split(" ").slice(1).join(" ");
 			if(suffix == "" || suffix == null) return message.channel.sendMessage("Do " +config.prefix+ "twitch <username?> for Online Status!");
 			request("https://api.twitch.tv/kraken/streams/"+suffix+"?client_id="+twitchkey, function(error, response, body) { //set info for the streamer in JSON
