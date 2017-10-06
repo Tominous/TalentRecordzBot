@@ -4,8 +4,8 @@ const prefix = config.prefix;
 const invite = `https://discordapp.com/oauth2/authorize?permissions=1341643849&scope=bot&client_id=${config.client_id}`;
 
 module.exports = (bot) => {
-	bot.addTraditionalCommand("servers", message => {
-		message.delete(1000)
+	bot.addCommand("servers", (payload) => {
+	var message = payload.message
         let embed = new Discord.RichEmbed();
         embed.setColor(0x9900FF)
         embed.setThumbnail(bot.client.user.avatarURL)
