@@ -65,8 +65,8 @@ module.exports = (bot) => {
 		}, 5 * 1000)
 	})
 
-	bot.addTraditionalCommand('radio on', (message) => {
-		message.delete(1000)
+	bot.addCommand('radio on', (payload) => {
+		var message = payload.message
 		let id = message.guild.id
 		let voiceChannel = message.member.voiceChannel
             
@@ -80,8 +80,8 @@ module.exports = (bot) => {
 	});
 
 
-	bot.addTraditionalCommand('radio off', (message) => {
-		message.delete(1000)
+	bot.addCommand('radio off', (payload) => {
+		var message = payload.message
 		if (message.guild.voiceConnection) {
             if (!message.member.voiceChannel) return message.channel.sendMessage('You need to be in a voice channel')
             	message.guild.voiceConnection.disconnect()
