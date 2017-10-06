@@ -1,12 +1,41 @@
 {
-  "token": "BotToken",
-  "client_id": "BotID",
-  "prefix": "Prefix",
-  "owner_id": "OwnerID",
-  "youtube_api_key": "YoutubeAPI",
-  "twitch_api_key": "TwitchclientID",
-  "owner": "yourname",
-  "twitchusername": "Usernamefortwitch",
-  "admins": ["UserID", "UserID", "UserID", "UserID", "UserID"],
-  "server_port":"Port"
+  "token": "Bot Token",
+  
+  "client_id": "BOT Client ID",
+  
+  "prefix": "PREFIX",
+  
+  "owner_id": "YourID",
+  
+  "owner": "Your Discord Name:id",
+  
+  "twitch_api_key": "TwitchAPI Key",
+  
+  "authorization": "bots.discord.pw API",
+  
+  "authorization1": "discordbots.org API",
+  
+  "twitchusername": "twitchname",
+  
+  "admins": ["admin1", "admin2", "admin3", "admin4"],
+  
+  "server_port":"serverport",
+  
+  "youtube":{
+
+    "enabled":"true",
+
+    "youtube_api_key": "YoutubeAPIKey"
+
+  },
+
+  "radio":{
+
+    "enabled":"false",
+
+    "radiourl": "RADIOURL",
+	
+	"radiostatus": "API RAIDO"
+
+  }
 }
