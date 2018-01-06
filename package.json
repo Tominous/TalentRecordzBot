@@ -6,6 +6,6 @@
     "youtube-search": "^1.0.10",
     "ytdl-core": "^0.10.4",
     "markdown": "^0.5.0",
-    "tortlebot-core": "^1.0.1"
+    "tortlebot-core": "1.0.1"
   }
 }
