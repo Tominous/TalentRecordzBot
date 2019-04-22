@@ -37,7 +37,7 @@ module.exports = (bot) => {
     function play(msg, queue, song) {
         try {
             if (!msg || !queue) return;
-            //if (msg.guild.voiceConnection.channel.members.first() == undefined)
+            if (msg.guild.voiceConnection.channel.members.first() == undefined)
             if (song) {
                 search(song, opts, function(err, results) {
                     if (err) return msg.channel.sendMessage("Video not found please try to use a youtube link instead.");
@@ -109,7 +109,7 @@ module.exports = (bot) => {
             if (svr[i].voiceConnection) {
                 if (paused[svr[i].voiceConnection.channel.id]) {
                     if (svr[i].voiceConnection.channel.members.size > 1) {
-                        //svr[i].defaultChannel.sendMessage("I resumed my music in " + svr[i].voiceConnection.channel.name)
+                        svr[i].defaultChannel.sendMessage("I resumed my music in " + svr[i].voiceConnection.channel.name)
     					paused[svr[i].voiceConnection.channel.id].player.resume()
     					var game = bot.client.user.presence.game.name;
                         delete paused[svr[i].voiceConnection.channel.id]
@@ -118,7 +118,7 @@ module.exports = (bot) => {
                     }
                 }
                 if (svr[i].voiceConnection.channel.members.size === 1 && !svr[i].voiceConnection.player.dispatcher.paused) {
-                    //svr[i].defaultChannel.sendMessage("I paused my music in the voice channel because no one is there, rejoin the channel to resume music")
+                    svr[i].defaultChannel.sendMessage("I paused my music in the voice channel because no one is there, rejoin the channel to resume music")
                     svr[i].voiceConnection.player.dispatcher.pause();
                     var game = bot.client.user.presence.game.name;
                     paused[svr[i].voiceConnection.channel.id] = {
